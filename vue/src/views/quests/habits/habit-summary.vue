@@ -1,5 +1,7 @@
 <template>
-    <h4 class="name">{{habit.name}}</h4>
+    <div class="habit-summary">
+        <h4 class="name">{{habit.name}}</h4>
+    </div>
 </template>
 
 <script>
@@ -14,7 +16,13 @@ export default {
 </script>
 
 <style scoped>
+.habit-summary {
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
 .name { 
-    color: #F00;
+    color: #FFF;
 }
 </style>
