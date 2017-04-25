@@ -1,17 +1,13 @@
 <template>
     <div class="habit-summary">
         <h4 class="name">{{habit.name}}</h4>
+        <p classs="desc" v-if="expanded">{{habit.desc}}</p>
     </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            // name: "Habit Name"
-        }
-    },
-    props: ["habit"]
+    props: ["expanded", "habit"]
 }
 </script>
 
