@@ -1,6 +1,22 @@
 import * as types from "@/stores/mutation-types"
 import * as scales from "@/stores/modules/scale-types"
 
+function isValidHabit(habit) {
+    let validation = {errors: [], failed: false}
+
+    // TODO: Create validation util module.
+    if (!habit.name) {
+        validation.failed = true
+        validation.errors.push({ prop: "name", message: "Please provide a name" })
+    }
+    if (!habit.desc) {
+        validation.failed = true
+        validation.errors.push({ prop: "desc", message: "Please provide a description" })
+    }
+
+    return validation
+}
+
 export default {
     namespaced: true,
 
@@ -36,22 +52,40 @@ export default {
 
     actions: {
         createHabit({commit, state}, habit) {
-            // Business logic ops:
-            //  - Validate the habit.
-            // Perform side effects:
-            //  - Do async stuff i.e. save the habit to storage (API/localStorage/etc).
-            //  - Send notifications.
-            //  - Etc...
-            commit(types.CREATE_HABIT, habit)
+            let result
+            let validation = isValidHabit(habit)
+
+            if (validation.failed) {
+                console.log("The new habit failed validation: ", validation.errors)
+                result = Promise.reject(validation.errors)
+            } else {
+                let newId = Math.max.apply(null, state.habits.map(h => h.id)) + 1
+                let newHabit = { ...habit, id: newId }
+                // Business logic ops:
+                //  - Validate the habit.
+                // Perform side effects:
+                //  - Do async stuff i.e. save the habit to storage (API/localStorage/etc).
+                //  - Send notifications.
+                //  - Etc...
+
+                commit(types.CREATE_HABIT, newHabit)
+
+                result = Promise.resolve(newHabit)
+            }
+
+            return result
         },
         setScaleFilter({commit}, value) {
             commit(types.SET_SCALE_FILTER, value.scaleFilter)
+
+            return Promise.resolve()
         }
     },
 
     mutations: {
         [types.CREATE_HABIT](state, habit) {
-            const newId = Math.max.apply(null, state.map(s => s.id)) + 1
+            console.log(state)
+            const newId = Math.max.apply(null, state.habits.map(s => s.id)) + 1
 
             state.habits.push({ ...habit, id: newId })
         },

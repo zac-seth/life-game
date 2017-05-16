@@ -2,13 +2,13 @@
     <div class="app" id="you-quest">
         <h1 class="title">Welcome to YouQuest</h1>
         <router-view class="primary-window"></router-view>
-      <create-habit></create-habit>
+      <modal-create-habit></modal-create-habit>
     </div>
 </template>
 
 <script>
 import store from "@/stores"
-import createHabit from "@/views/quests/habits/create-habit"
+import createHabitModal from "@/views/quests/habits/modal/create-habit"
 
 export default {
     name: 'you-quest',
@@ -16,7 +16,7 @@ export default {
     store,
 
     components: {
-        "create-habit": createHabit
+        "modal-create-habit": createHabitModal
     },
 
     created() {
