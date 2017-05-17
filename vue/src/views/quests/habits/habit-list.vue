@@ -28,8 +28,18 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import store from "@/stores"
+import names from "@/stores/names"
 import * as scales from "@/stores/modules/scale-types"
 import Summary from "@/views/quests/habits/habit-summary"
+
+const actions = {
+    DISPLAY_LAYER: `${names.module.APPLICATION}/${names.action.DISPLAY_LAYER}`,
+    SET_SCALE_FILTER: `${names.module.APPLICATION}/${names.action.SET_SCALE_FILTER}`
+}
+
+const getters = {
+    LAYER_TYPES: `${names.module.APPLICATION}/${names.getter.LAYER_TYPES}`
+}
 
 export default {
     store,
@@ -43,22 +53,25 @@ export default {
 
     computed: {
         ...mapGetters("habits", {
-            habits: "filterHabitsByScale"
+            habits: names.getter.HABITS_FILTERED_BY_SCALE
         })
     },
 
     methods: {
         activateHabitCreation() {
-            this.$store.dispatch("view/showModal", "createHabit")
+            this.$store
+                .dispatch(actions.DISPLAY_LAYER, { 
+                    name: "createHabit", 
+                    type: this.$store.getters[getters.LAYER_TYPES].MODAL 
+                })
         }
-        // ...mapActions("habits", [
-        //     "createHabit"
-        // ])
     },
 
     watch: {
         scaleFilter(scaleFilter) {
-            this.$store.dispatch("habits/setScaleFilter", {scaleFilter: this.scaleFilter})
+            this.$store.dispatch(actions.SET_SCALE_FILTER, {
+                scaleFilter: this.scaleFilter
+            })
         }
     },
 

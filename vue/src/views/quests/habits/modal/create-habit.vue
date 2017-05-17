@@ -1,5 +1,5 @@
 <template>
-    <modal :show="show" modal-title="Create Habit">
+    <modal :show="show" modal-title="Create Habit" name="createHabit">
         <label for="name">Name</label>
         <input type="text" name="name" v-model="name" placeholder="Enter the name here" />
         <label for="desc">Description</label>
@@ -19,8 +19,14 @@
 
 <script>
 import store from "@/stores"
+import names from "@/stores/names"
 import * as scaleTypes from "@/stores/modules/scale-types"
 import modal from "@/components/modal"
+
+const actions = {
+    REMOVE_LAYER: `${names.module.APPLICATION}/${names.action.REMOVE_LAYER}`,
+    CREATE_HABIT:  `${names.module.HABIT}/${names.action.CREATE_HABIT}`
+}
 
 export default {
     store,
@@ -35,7 +41,7 @@ export default {
 
     computed: {
         show() {
-            return this.$store.state.view.modal.show.createHabit
+            return this.$store.state.application.types.modal.createHabit
         }
     },
 
@@ -46,12 +52,12 @@ export default {
             this.scale = scaleTypes.NONE
 
             this.$store
-                .dispatch("view/cancelView")
+                .dispatch(actions.REMOVE_LAYER)
                 .then(() => console.log("Create habit modal closed."), failure => console.log("Failed to close create habit modal.", failure))
         },
         save() {
             this.$store
-                .dispatch("habits/createHabit", {
+                .dispatch(actions.CREATE_HABIT, {
                     name: this.name,
                     desc: this.desc,
                     scale: this.scale

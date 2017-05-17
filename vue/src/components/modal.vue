@@ -1,6 +1,6 @@
 <template>
     <!-- Derived from: https://adamwathan.me/2016/01/04/composing-reusable-modal-dialogs-with-vuejs/ -->
-    <div class="modal-mask" @click="close" v-show="show" :close="close" transition="modal">
+    <div class="modal-mask" @click.stop="close" v-show="show" :close="close">
         <section class="modal-container" @click.stop>
             <h3 class="modal-title">{{modalTitle}}</h3>
             <div class="modal-body">
@@ -12,15 +12,26 @@
 
 <script>
 import store from "@/stores"
+import names from "@/stores/names"
+
+const actions = {
+    REMOVE_LAYER: `${names.module.APPLICATION}/${names.action.REMOVE_LAYER}`
+}
 
 export default {
     store,
 
-    props: ["onClose", "modalTitle", "show"],
+    props: [
+        "onClose", 
+        "modalTitle", 
+        "name",
+        "show"
+    ],
     
     methods: {
         close() {
-            this.$store.dispatch("view/closeModal", "createHabit")
+            this.$store
+                .dispatch(actions.REMOVE_LAYER, this.name)
         }
     }
 }

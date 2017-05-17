@@ -1,5 +1,0 @@
-export const ADD_CANCELABLE         = "ADD_CANCELABLE"
-export const CANCEL_TOP_OF_STACK    = "CANCEL_TOP_OF_STACK"
-export const CREATE_HABIT           = "HABIT_CREATE"
-export const SET_MODAL_VISIBILITY   = "SET_MODAL_VISIBILITY"
-export const SET_SCALE_FILTER       = "SET_SCALE_FILTER"

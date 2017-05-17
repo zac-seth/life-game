@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HabitList from '@/views/quests/habits/habit-list'
+import Home from '@/views/home'
 
 Vue.use(Router)
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'habit-list',
-      component: HabitList
+      name: 'home',
+      component: Home
     }
   ]
 })
