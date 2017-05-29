@@ -1,8 +1,8 @@
 import React from "react"
+import PropTypes from "prop-types"
 import {styled} from "styletron-react"
 
 function snapSide(cb) {
-    console.log("Snapper built")
     return side => {
         switch (side) {
             case "top":
@@ -15,7 +15,7 @@ function snapSide(cb) {
     }
 }
 
-function snap(snap) {
+function applySnap(snap) {
     let result = {}
 
     if (snap) {
@@ -30,11 +30,15 @@ function snap(snap) {
     return result
 }
 
-const Overlay = styled("div", props => ({
-    ...snap(props.snap),
+const Overlay = styled("div", ({snap}) => ({
+    ...applySnap(snap),
     position: "absolute",
     backgroundColor: "#FFF",
     padding: "10px"
 }))
+
+Overlay.propTypes = {
+    snap: PropTypes.string.isRequired
+}
 
 export default Overlay

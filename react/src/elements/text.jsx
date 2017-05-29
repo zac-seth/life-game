@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import {styled} from "styletron-react"
 
 const Header = styled("h1", props => ({
@@ -21,6 +22,10 @@ const Text = props => {
     const Element = chooseElementType(props)
 
     return <Element {...props}>{props.children}</Element>
+}
+
+Text.propTypes = {
+    header: PropTypes.bool
 }
 
 export default Text

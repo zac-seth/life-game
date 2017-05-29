@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import {styled} from "styletron-react"
 
 function chooseBackground(type) {
@@ -23,14 +24,19 @@ function chooseBackground(type) {
     }
 }
 
-const Button = styled("button", props => ({
-    ...chooseBackground(props.type),
+const Button = styled("button", ({type, styles}) => ({
+    ...chooseBackground(type),
     color: "#FFF",
     padding: "5px 10px",
     border: "none",
     borderRadius: 0,
     outline: "none",
-    ...(props.styles || {})
+    ...(styles || {})
 }))
+
+Button.propTypes = {
+    type: PropTypes.string.isRequired,
+    styles: PropTypes.object
+}
 
 export default Button

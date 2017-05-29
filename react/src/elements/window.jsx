@@ -10,10 +10,12 @@ const WindowContainer = styled("section", {
     margin: 10
 })
 
-const Text = props => (
+const Window = props => (
     <WindowContainer>
         {props.children}
     </WindowContainer>
 )
 
-export default Text
+Window.propTypes = {}
+
+export default Window

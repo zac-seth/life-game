@@ -1,22 +1,30 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import {BrowserRouter} from "react-router-dom"
+import { Provider as ReduxProvider } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
 import StyletronClient from "styletron-client"
-import {StyletronProvider} from "styletron-react"
-import App from "@/app"
+import { StyletronProvider } from "styletron-react"
+import ConnectedApp from "@/connected-app"
+import configureStore from "@/store"
+import {loadHabitsAsync} from "@/store/habits/actions"
 
 import "minireset.css"
+
+const store = configureStore()
+store.dispatch(loadHabitsAsync())
 
 const styletron = new StyletronClient(document.getElementById("styles"))
 
 const YouQuest = class extends React.Component {
     render() {
         return (
-            <StyletronProvider styletron={styletron}>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </StyletronProvider>
+            <ReduxProvider store={store}>
+                <StyletronProvider styletron={styletron}>
+                    <BrowserRouter>
+                        <ConnectedApp />
+                    </BrowserRouter>
+                </StyletronProvider>
+            </ReduxProvider>
         )
     }
 }

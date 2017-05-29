@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Switch, Route } from "react-router-dom"
 import { styled } from "styletron-react"
 
@@ -11,12 +12,16 @@ const WindowFrameContainer = styled("div", {
     margin: 10
 })
 
-const WindowFrame = props => (
+const WindowFrame = ({ routes }) => (
     <WindowFrameContainer>
         <Switch>
-            {props.routes.map((route, i) => <Route key={i} {...route} />)}
+            {routes.map((route, i) => <Route key={i} {...route} />)}
         </Switch>
     </WindowFrameContainer>
 )
+
+WindowFrame.propTypes = {
+    routes: PropTypes.array.isRequired
+}
 
 export default WindowFrame
