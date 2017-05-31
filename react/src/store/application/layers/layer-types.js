@@ -1,7 +1,7 @@
 import deepFreeze from "deep-freeze"
 
 export default deepFreeze({
-    DIALOG: "DIALOG",
-    MODAL: "MODAL",
-    WINDOW: "WINDOW"
+    DIALOG: "dialog",
+    MODAL: "modal",
+    WINDOW: "window"
 })

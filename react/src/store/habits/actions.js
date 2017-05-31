@@ -1,5 +1,40 @@
+import { createAction } from "@/utils/store"
 import names from "@/store/names"
 import { loadedHabits } from "./initial-state"
+
+const { mutations } = names
+
+export function createHabitAsync(habit) {
+    return (dispatch, getState) => {
+        let validation = isValidHabit(habit)
+
+        if (validation.failed) {
+            return Promise.reject(validation.errors)
+        }
+        
+        const state = getState()
+        let newId = Math.max.apply(null, state.habits.map(h => h.id)) + 1
+        let newHabit = { ...habit, id: newId }
+
+        dispatch(createAction(mutations.CREATE_HABIT, newHabit))
+
+        return Promise.resolve()
+    }
+}
+
+export function loadHabitsAsync() {
+    return dispatch => {
+        dispatch(createAction(mutations.SET_HABITS, loadedHabits))
+
+        return Promise.resolve()
+    }
+}
+
+export function setScaleFilterAsync(scaleFilter) {
+    dispatch(createAction(mutations.SET_SCALE_FILTER, scaleFilter))
+
+    return Promise.resolve()
+}
 
 function isValidHabit(habit) {
     let validation = { errors: [], failed: false }
@@ -15,62 +50,4 @@ function isValidHabit(habit) {
     }
 
     return validation
-}
-
-export function createHabit(habit) {
-    return {
-        type: names.mutations.CREATE_HABIT,
-        habit
-    }
-}
-
-export function createHabitAsync(habit) {
-    return (dispatch, getState) => {
-        let validation = isValidHabit(habit)
-
-        if (validation.failed) {
-            return Promise.reject(validation.errors)
-        }
-        
-        const state = getState()
-        let newId = Math.max.apply(null, state.habits.map(h => h.id)) + 1
-        let newHabit = { ...habit, id: newId }
-
-        dispatch(createHabit(newHabit))
-
-        return Promise
-            .resolve(dispatch(createHabit(newHabit)))
-            .then(action => action.habit)
-    }
-}
-
-export function loadHabitsAsync() {
-    return dispatch => Promise
-        .resolve(loadedHabits)
-        .then(habits => {
-            dispatch(setHabits(habits))
-        })
-        .catch(error => {
-            // TODO: Handle the error.
-        })
-}
-
-export function setHabits(habits) {
-    return {
-        type: names.mutations.SET_HABITS,
-        habits
-    }
-}
-
-export function setScaleFilter(scaleFilter) {
-    return {
-        type: names.mutations.SET_SCALE_FILTER,
-        scaleFilter
-    }
-}
-
-export function setScaleFilterAsync(scaleFilter) {
-    dispatch(setScaleFilter(scaleFilter))
-
-    return Promise.resolve()
 }

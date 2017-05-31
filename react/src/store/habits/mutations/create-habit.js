@@ -1,1 +1,0 @@
-export default (habits, newHabit) => [...habits, newHabit]

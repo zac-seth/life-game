@@ -1,16 +1,34 @@
+import { createReducer } from "@/utils/store"
 import names from "@/store/names"
 import initialState from "./initial-state"
-import * as mutations from "./mutations"
 
-export default function reducer(previousState = initialState, action) {
-    switch (action.type) {
-        case names.mutations.ADD_LAYER_TO_STACK:
-            return mutations.addLayerToStack(previousState, action.layer)
-        case names.mutations.REMOVE_LAYER_FROM_STACK:
-            return mutations.removeLayerFromStack(previousState)
-        case names.mutations.SET_LAYER_VISIBILITY:
-            return mutations.setLayerVisibility(previousState, action.layerType.toLowerCase(), action.name)
-        default:
-            return previousState
+const { mutations } = names
+
+export default createReducer({
+    [mutations.ADD_LAYER_TO_STACK]({ stack, types }, layer) {
+        return {
+            stack: [...stack, layer],
+            types: { ...types }
+        }
+    },
+
+    [mutations.REMOVE_LAYER_FROM_STACK]({ stack, types }, { type, name }) {
+        return {
+            stack: stack.filter(layer => layer.type !== type || layer.name !== name),
+            types: { ...types }
+        }
+    },
+
+    [mutations.SET_LAYER_VISIBILITY]({ stack, types }, { type, name }) {
+        return {
+            stack: [...stack],
+            types: {
+                ...types,
+                [type]: {
+                    ...types[type],
+                    [name]: !types[type][name]
+                }
+            }
+        }
     }
-}
+}, initialState)

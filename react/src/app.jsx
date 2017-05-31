@@ -16,19 +16,24 @@ const AppContainer = styled("div", {
     backgroundColor: "#2B2B2B"
 })
 
-const App = ({ onToggleShortcut, showHabits, showTest }) => (
+const App = ({ habitsWindow, testWindow, onToggleShortcut }) => (
     <AppContainer>
         <WindowFrame routes={routes} />
         <Shortcuts snap="bottom-right" onToggle={name => onToggleShortcut(name)} />
-        <HabitsWindow show={showHabits} />
-        <TestWindow show={showTest} />
+        <HabitsWindow settings={habitsWindow}  />
+        <TestWindow settings={testWindow} />
     </AppContainer>
 )
 
+const modalSettingsShape = {
+    layer: PropTypes.number.isRequired,
+    show: PropTypes.bool.isRequired
+}
+
 App.propTypes = {
     onToggleShortcut: PropTypes.func.isRequired,
-    showHabits: PropTypes.bool.isRequired,
-    showTest: PropTypes.bool.isRequired
+    habitsWindow: PropTypes.shape(modalSettingsShape),
+    testWindow: PropTypes.shape(modalSettingsShape)
 }
 
 export default App

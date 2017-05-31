@@ -1,17 +1,28 @@
 import React from "react"
 import { connect } from "react-redux"
 import App from "./app"
-import { setLayerVisibilityAsync } from "@/store/application/layers/actions"
+import { toggleLayerVisibilityAsync } from "@/store/application/layers/actions"
 import layerTypes from "@/store/application/layers/layer-types"
 
-const mapStateToProps = (state, ownProps) => ({
-    showHabits: state.application.layers.types.window.habits,
-    showTest: state.application.layers.types.window.test
+function mapWindowSettings(state, name) {
+    const { layers } = state.application
+    const show = layers.types.window[name]
+    const layer = layers.stack.find(layer => layer.type === layerTypes.WINDOW && layer.name === name)
+
+    return {
+        show: show,
+        layer: layer ? layers.stack.indexOf(layer) : -1
+    }
+}
+
+const mapStateToProps = (state, props) => ({
+    habitsWindow: mapWindowSettings(state, "habits"),
+    testWindow: mapWindowSettings(state, "test")
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, props) => ({
     onToggleShortcut: name => {
-        dispatch(setLayerVisibilityAsync(layerTypes.WINDOW, name))
+        dispatch(toggleLayerVisibilityAsync({ type: layerTypes.WINDOW, name }))
     }
 })
 
