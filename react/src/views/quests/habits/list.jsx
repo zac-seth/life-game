@@ -27,10 +27,14 @@ HabitList.propTypes = {
     onToggleExpanded: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    habits: ownProps.scale === NONE ? state.habits : state.habits.filter(habit => habit.scale === ownProps.scale),
-    expanded: state.application.habits.expanded
-})
+const mapStateToProps = ({ application, habits }, ownProps) => {
+    const scaleFilter = application.habits.scaleFilter
+
+    return {
+        habits: scaleFilter === NONE ? habits : habits.filter(habit => habit.scale === scaleFilter),
+        expanded: application.habits.expanded
+    }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onToggleExpanded: expanded => {
@@ -40,8 +44,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 HabitList = connect(mapStateToProps, mapDispatchToProps)(HabitList)
 
-HabitList.propTypes = {
-    scale: PropTypes.string.isRequired
-}
+HabitList.propTypes = {}
 
 export default HabitList

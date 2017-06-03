@@ -10,3 +10,11 @@ export function setExpandedHabits(expanded) {
         return Promise.resolve()
     }
 }
+
+export function setScaleFilter(scaleFilter) {
+    return dispatch => {
+        dispatch(createAction(mutations.SET_SCALE_FILTER, scaleFilter))
+
+        return Promise.resolve()
+    }
+}

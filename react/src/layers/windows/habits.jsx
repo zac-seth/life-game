@@ -8,7 +8,7 @@ import { NONE } from "@/store/habits/habit-scales"
 const HabitsWindow = ({ settings }) => (
     <ModalWindow title="Habits" settings={settings}>
         <ListFilter />
-        <HabitList scale={NONE} />
+        <HabitList />
     </ModalWindow>
 )
 

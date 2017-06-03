@@ -1,23 +1,33 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
+import random from "randomstring"
+import InputGroup from "./input-group"
 import Text from "./text"
 
 const modes = {
     SINGLE: "SINGLE"
 }
 
-const DropDown = styled("select", ({}) => {
+const DropDown = styled("select", ({  }) => {
 
 })
 
-DropDown.propTypes = {
-
-}
+DropDown.propTypes = {}
 
 const OptionPicker = props => {
+    const inputName = random.generate({
+        length: 6,
+        charset: "alphanumeric"
+    })
+
     if (props.mode === modes.SINGLE) {
-        return buildDropDown(props)
+        return (
+            <InputGroup>
+                <Text label for={inputName}>{props.label}</Text>
+                {buildDropDown(props, inputName)}
+            </InputGroup>
+        )
     }
 
     return null
@@ -50,7 +60,7 @@ OptionPicker.propTypes = {
     onSelectionMade: PropTypes.func
 }
 
-function buildDropDown({ label, options, selectedIndex, onSelectionMade }) {
+function buildDropDown({ options, selectedIndex, onSelectionMade }, inputName) {
     const items = options.map((option, index) => {
         return (
             <option value={option.value} key={index}>
@@ -60,7 +70,7 @@ function buildDropDown({ label, options, selectedIndex, onSelectionMade }) {
     })
 
     return (
-        <DropDown value={options[selectedIndex].value} onChange={onSelectionMade}>
+        <DropDown name={inputName} value={options[selectedIndex].value} onChange={e => onSelectionMade({value: e.target.value})}>
             {items}
         </DropDown>
     )

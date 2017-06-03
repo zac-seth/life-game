@@ -1,8 +1,14 @@
 import button from "./button"
 export const Button = button
 
+import checkBox from "./check-box"
+export const CheckBox = checkBox
+
 import filterGroup from "./filter-group"
 export const FilterGroup = filterGroup
+
+import inputGroup from "./input-group"
+export const InputGroup = inputGroup
 
 import list from "./list"
 export const List = list
@@ -12,6 +18,9 @@ export const ListItem = listItem
 
 import modalWindow from "./modal-window"
 export const ModalWindow = modalWindow
+
+import onOffSwitch from "./on-off-switch"
+export const OnOffSwitch = onOffSwitch
 
 import optionPicker from "./option-picker"
 export const OptionPicker = optionPicker

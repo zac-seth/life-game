@@ -6,16 +6,26 @@ const Header = styled("h1", props => ({
     fontSize: "2em"
 }))
 
+const Label = styled("label", props => ({
+
+}))
+
 const Paragraph = styled("p", props => ({
     fontSize: "1.2em"
 }))
 
 function chooseElementType(props) {
     if (props.header) {
-        return Header
+        return <Header>{props.children}</Header>
+    } if (props.label) {
+        if (!props.for) {
+            console.warn("A label text component was created without a target.")
+        }
+
+        return <Label for={props.for}>{props.children}</Label>
     }
 
-    return Paragraph
+    return <Paragraph>{props.children}</Paragraph>
 }
 
 const Text = props => {
@@ -23,13 +33,13 @@ const Text = props => {
         return null
     }
 
-    const Element = chooseElementType(props)
-
-    return <Element {...props}>{props.children}</Element>
+    return chooseElementType(props)
 }
 
 Text.propTypes = {
-    header: PropTypes.bool
+    header: PropTypes.bool,
+    label: PropTypes.bool,
+    for: PropTypes.string
 }
 
 export default Text
