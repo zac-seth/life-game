@@ -9,7 +9,7 @@ export default createReducer({
         return [...habits, habit]
     },
 
-    [mutations.SET_HABITS](habits) {
-        return habits
+    [mutations.SET_HABITS](habits, newHabits) {
+        return [...habits, ...newHabits]
     }
 }, initialState)

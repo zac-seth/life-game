@@ -21,6 +21,9 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.SourceMapDevToolPlugin({
+            test: /\.jsx?$/
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',

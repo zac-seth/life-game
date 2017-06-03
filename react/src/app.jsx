@@ -1,6 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { connect } from "react-redux"
 import { styled } from "styletron-react"
+import { toggleLayerVisibility } from "@/store/application/layers/actions"
+import layerTypes from "@/store/application/layers/layer-types"
 import routes from "@/routes"
 import { WindowFrame } from "@/elements"
 import Shortcuts from "@/overlays/shortcuts"
@@ -16,7 +19,7 @@ const AppContainer = styled("div", {
     backgroundColor: "#2B2B2B"
 })
 
-const App = ({ habitsWindow, testWindow, onToggleShortcut }) => (
+let App = ({ habitsWindow, testWindow, onToggleShortcut }) => (
     <AppContainer>
         <WindowFrame routes={routes} />
         <Shortcuts snap="bottom-right" onToggle={name => onToggleShortcut(name)} />
@@ -35,5 +38,29 @@ App.propTypes = {
     habitsWindow: PropTypes.shape(modalSettingsShape),
     testWindow: PropTypes.shape(modalSettingsShape)
 }
+
+function mapWindowSettings(state, name) {
+    const { layers } = state.application
+    const show = layers.types.window[name]
+    const layer = layers.stack.find(layer => layer.type === layerTypes.WINDOW && layer.name === name)
+
+    return {
+        show: show,
+        layer: layer ? layers.stack.indexOf(layer) : -1
+    }
+}
+
+const mapStateToProps = (state, props) => ({
+    habitsWindow: mapWindowSettings(state, "habits"),
+    testWindow: mapWindowSettings(state, "test")
+})
+
+const mapDispatchToProps = (dispatch, props) => ({
+    onToggleShortcut: name => {
+        dispatch(toggleLayerVisibility({ type: layerTypes.WINDOW, name }))
+    }
+})
+
+App = connect(mapStateToProps, mapDispatchToProps)(App)
 
 export default App

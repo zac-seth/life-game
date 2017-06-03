@@ -1,10 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { ModalWindow } from "@/elements"
+import HabitList from "@/views/quests/habits/list"
+import ListFilter from "@/views/quests/habits/list-filter"
+import { NONE } from "@/store/habits/habit-scales"
 
 const HabitsWindow = ({ settings }) => (
     <ModalWindow title="Habits" settings={settings}>
-        <h1>Habits Window</h1>
+        <ListFilter />
+        <HabitList scale={NONE} />
     </ModalWindow>
 )
 

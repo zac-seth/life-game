@@ -19,6 +19,10 @@ function chooseElementType(props) {
 }
 
 const Text = props => {
+    if (!props.children || !props.children[0]) {
+        return null
+    }
+
     const Element = chooseElementType(props)
 
     return <Element {...props}>{props.children}</Element>

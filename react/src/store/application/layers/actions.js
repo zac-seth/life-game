@@ -4,7 +4,7 @@ import layerTypes from "./layer-types"
 
 const { mutations } = names
 
-export function toggleLayerVisibilityAsync(layer) {
+export function toggleLayerVisibility(layer) {
     return function(dispatch, getState) {
         const layers = getState().application.layers,
             stack = layers.stack

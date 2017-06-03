@@ -4,14 +4,14 @@ import { Provider as ReduxProvider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import StyletronClient from "styletron-client"
 import { StyletronProvider } from "styletron-react"
-import ConnectedApp from "@/connected-app"
+import App from "@/app"
 import configureStore from "@/store"
-import {loadHabitsAsync} from "@/store/habits/actions"
+import { loadHabits } from "@/store/habits/actions"
 
 import "minireset.css"
 
 const store = configureStore()
-store.dispatch(loadHabitsAsync())
+store.dispatch(loadHabits())
 
 const styletron = new StyletronClient(document.getElementById("styles"))
 
@@ -21,7 +21,7 @@ const YouQuest = class extends React.Component {
             <ReduxProvider store={store}>
                 <StyletronProvider styletron={styletron}>
                     <BrowserRouter>
-                        <ConnectedApp />
+                        <App />
                     </BrowserRouter>
                 </StyletronProvider>
             </ReduxProvider>

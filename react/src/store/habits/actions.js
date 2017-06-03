@@ -4,7 +4,7 @@ import { loadedHabits } from "./initial-state"
 
 const { mutations } = names
 
-export function createHabitAsync(habit) {
+export function createHabit(habit) {
     return (dispatch, getState) => {
         let validation = isValidHabit(habit)
 
@@ -22,7 +22,7 @@ export function createHabitAsync(habit) {
     }
 }
 
-export function loadHabitsAsync() {
+export function loadHabits() {
     return dispatch => {
         dispatch(createAction(mutations.SET_HABITS, loadedHabits))
 
@@ -30,7 +30,7 @@ export function loadHabitsAsync() {
     }
 }
 
-export function setScaleFilterAsync(scaleFilter) {
+export function setScaleFilter(scaleFilter) {
     dispatch(createAction(mutations.SET_SCALE_FILTER, scaleFilter))
 
     return Promise.resolve()
