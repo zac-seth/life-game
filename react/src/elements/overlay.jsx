@@ -9,7 +9,7 @@ function snapSide(cb) {
             case "bottom":
             case "left":
             case "right":
-                cb({[side]: 0})
+                cb({[side]: "10px"})
                 return;
         }
     }
@@ -34,7 +34,8 @@ const Overlay = styled("div", ({snap}) => ({
     ...applySnap(snap),
     position: "absolute",
     backgroundColor: "#FFF",
-    padding: "10px"
+    padding: "10px",
+    zIndex: 50
 }))
 
 Overlay.propTypes = {

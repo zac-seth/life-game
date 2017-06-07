@@ -21,7 +21,7 @@ const ModalWindow = ({ children, title, settings }) => {
     }
 
     return (
-        <WindowLayerFrame layer={settings.layer}>
+        <WindowLayerFrame layer={settings.layer} draggable>
             <TitleBar>
                 <Text header>{title}</Text>
             </TitleBar>

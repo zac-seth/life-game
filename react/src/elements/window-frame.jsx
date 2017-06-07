@@ -9,7 +9,8 @@ const WindowFrameContainer = styled("div", {
     left: 0,
     bottom: 0,
     right: 0,
-    margin: 10
+    margin: 10,
+    zIndex: 2
 })
 
 const WindowFrame = ({ routes }) => (

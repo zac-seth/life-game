@@ -11,6 +11,9 @@ export default deepFreeze({
 
         // Habits
         CREATE_HABIT: "CREATE_HABIT",
-        SET_HABITS: "SET_HABITS"
+        SET_HABITS: "SET_HABITS",
+
+        // Wallpapers
+        SET_WALLPAPER_INDEX: "SET_WALLPAPER_INDEX"
     }
 })
