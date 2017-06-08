@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
 import random from "randomstring"
+import { buildEnumValidator } from "@/utils/custom-prop-types"
 import InputGroup from "./input-group"
 import Text from "./text"
 
@@ -37,7 +38,8 @@ OptionPicker.mode = modes
 
 OptionPicker.propTypes = {
     label: PropTypes.string,
-    mode: function(props, propName) {
+    mode: buildEnumValidator("OptionPicker", modes),
+    /*mode: function(props, propName) {
         const mode = props[propName]
 
         if (!mode) {
@@ -47,7 +49,7 @@ OptionPicker.propTypes = {
         }
 
         return null
-    },
+    },*/
     options: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         value: PropTypes.oneOfType([

@@ -11,8 +11,7 @@ let Wallpaper = styled("div", ({ image }) => ({
     right: 0,
     zIndex: 1,
     background: `url(${image}) no-repeat center center fixed`,
-    backgroundSize: "fixed",
-    transition: "3s"
+    backgroundSize: "fixed"
 }))
 
 Wallpaper.propTypes = {

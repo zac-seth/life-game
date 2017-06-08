@@ -10,13 +10,15 @@ import { loadHabits } from "@/store/habits/actions"
 import { setSelectedWallpaperIndex } from "@/store/wallpapers/actions"
 
 import "minireset.css"
+import "@/assets/globals.css"
+import "@/assets/fonts.css"
 
 const store = configureStore()
 store.dispatch(loadHabits())
 
 setInterval(() => {
     store.dispatch(setSelectedWallpaperIndex())
-}, 30000)
+}, 10000)
 
 const styletron = new StyletronClient(document.getElementById("styles"))
 

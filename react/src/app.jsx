@@ -6,9 +6,10 @@ import { toggleLayerVisibility } from "@/store/application/layers/actions"
 import layerTypes from "@/store/application/layers/layer-types"
 import routes from "@/routes"
 import Wallpaper from "@/wallpaper"
-import { WindowFrame } from "@/elements"
-import Shortcuts from "@/overlays/shortcuts"
-import { HabitsWindow, TestWindow } from "@/layers/windows"
+import { PageFrame } from "@/elements"
+import Shortcuts from "@/views/overlays/shortcuts"
+import { CreateHabitModal } from "@/views/layers/modals"
+import { HabitsWindow, TestWindow } from "@/views/layers/windows"
 
 const AppContainer = styled("div", {
     position: "absolute",
@@ -20,28 +21,33 @@ const AppContainer = styled("div", {
     backgroundColor: "#2B2B2B"
 })
 
-let App = ({ habitsWindow, testWindow, onToggleShortcut }) => (
+let App = ({ createHabitModal, habitsWindow, testWindow, onToggleShortcut }) => (
     <AppContainer>
         <Wallpaper />
-        <WindowFrame routes={routes} />
+        <PageFrame routes={routes} />
         <Shortcuts snap="bottom-right" onToggle={name => onToggleShortcut(name)} />
         <HabitsWindow settings={habitsWindow}  />
         <TestWindow settings={testWindow} />
+        <CreateHabitModal settings={createHabitModal} />
     </AppContainer>
 )
 
-const modalSettingsShape = {
+const windowSettingsShape = {
     layer: PropTypes.number.isRequired,
     show: PropTypes.bool.isRequired
 }
 
 App.propTypes = {
     onToggleShortcut: PropTypes.func.isRequired,
-    habitsWindow: PropTypes.shape(modalSettingsShape),
-    testWindow: PropTypes.shape(modalSettingsShape)
+    habitsWindow: PropTypes.shape(windowSettingsShape).isRequired,
+    testWindow: PropTypes.shape(windowSettingsShape).isRequired,
+    createHabitModal: PropTypes.shape({
+        show: PropTypes.bool.isRequired
+    }).isRequired
 }
 
 const mapStateToProps = (state, props) => ({
+    createHabitModal: mapModalSettings(state, "createHabit"),
     habitsWindow: mapWindowSettings(state, "habits"),
     testWindow: mapWindowSettings(state, "test")
 })
@@ -64,5 +70,14 @@ function mapWindowSettings(state, name) {
     return {
         show: show,
         layer: layer ? layers.stack.indexOf(layer) : -1
+    }
+}
+
+function mapModalSettings(state, name) {
+    const { layers } = state.application
+    const show = layers.types.modal[name]
+
+    return {
+        show
     }
 }

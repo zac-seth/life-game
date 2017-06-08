@@ -8,6 +8,10 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
 
     return {
         backgroundColor: "#FFF",
+        flex: "0 0 640px",
+        width: "640px",
+        height: "320px",
+        boxShadow: "3px 3px 3px 0 #BBB",
         position: "absolute",
         top: `${indent}px`,
         left: `${indent}px`,
@@ -15,7 +19,7 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
     }
 })
 
-const ModalWindow = ({ children, title, settings }) => {
+const WindowLayer = ({ children, title, settings }) => {
     if (!settings.show) {
         return null;
     }
@@ -32,7 +36,7 @@ const ModalWindow = ({ children, title, settings }) => {
     )
 }
 
-ModalWindow.propTypes = {
+WindowLayer.propTypes = {
     title: PropTypes.string.isRequired,
     settings: PropTypes.shape({
         layer: PropTypes.number.isRequired,
@@ -40,4 +44,4 @@ ModalWindow.propTypes = {
     })
 }
 
-export default ModalWindow
+export default WindowLayer

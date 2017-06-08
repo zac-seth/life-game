@@ -16,8 +16,8 @@ export const List = list
 import listItem from "./list-item"
 export const ListItem = listItem
 
-import modalWindow from "./modal-window"
-export const ModalWindow = modalWindow
+import modalLayer from "./modal-layer"
+export const ModalLayer = modalLayer
 
 import onOffSwitch from "./on-off-switch"
 export const OnOffSwitch = onOffSwitch
@@ -27,6 +27,9 @@ export const OptionPicker = optionPicker
 
 import overlay from "./overlay"
 export const Overlay = overlay
+
+import pageFrame from "./page-frame"
+export const PageFrame = pageFrame
 
 import panel from "./panel"
 export const Panel = panel
@@ -46,5 +49,5 @@ export const TitleBar = titleBar
 import window from "./window"
 export const Window = window
 
-import windowFrame from "./window-frame"
-export const WindowFrame = windowFrame
+import windowLayer from "./window-layer"
+export const WindowLayer = windowLayer

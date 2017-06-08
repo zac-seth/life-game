@@ -3,14 +3,17 @@ import PropTypes from "prop-types"
 import {styled} from "styletron-react"
 
 const Header = styled("h1", props => ({
+    fontFamily: "'Exo 2', Helvetica, Arial, Sans-Serif",
     fontSize: "2em"
 }))
 
 const Label = styled("label", props => ({
-
+    fontFamily: "Lato, Helvetica, Arial, Sans-Serif",
+    fontSize: "0.8em"
 }))
 
 const Paragraph = styled("p", props => ({
+    fontFamily: "Lato, Helvetica, Arial, Sans-Serif",
     fontSize: "1.2em"
 }))
 

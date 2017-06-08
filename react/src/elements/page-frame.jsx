@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Switch, Route } from "react-router-dom"
 import { styled } from "styletron-react"
 
-const WindowFrameContainer = styled("div", {
+const PageFrameContainer = styled("div", {
     position: "absolute",
     top: 0,
     left: 0,
@@ -13,16 +13,16 @@ const WindowFrameContainer = styled("div", {
     zIndex: 2
 })
 
-const WindowFrame = ({ routes }) => (
-    <WindowFrameContainer>
+const PageFrame = ({ routes }) => (
+    <PageFrameContainer>
         <Switch>
             {routes.map((route, i) => <Route key={i} {...route} />)}
         </Switch>
-    </WindowFrameContainer>
+    </PageFrameContainer>
 )
 
-WindowFrame.propTypes = {
+PageFrame.propTypes = {
     routes: PropTypes.array.isRequired
 }
 
-export default WindowFrame
+export default PageFrame

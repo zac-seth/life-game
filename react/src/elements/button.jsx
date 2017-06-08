@@ -1,31 +1,36 @@
 import React from "react"
 import PropTypes from "prop-types"
-import {styled} from "styletron-react"
+import { styled } from "styletron-react"
+import { buildEnumValidator } from "@/utils/custom-prop-types"
 
-function chooseBackground(type) {
-    if (!type) {
-        return {
-            backgroundColor: "#F00",
-            ":active": {
-                backgroundColor: "#E11"
-            }
+const buttonTypes = Object.freeze({
+    DEFAULT: "default",
+    SHORTCUT: "shortcut"
+})
+
+function buildTypedStyle(normalBG, activeBg) {
+    return {
+        backgroundColor: normalBG,
+        ":active": {
+            backgroundColor: activeBg
         }
+    }
+}
+
+function setButtonType(type) {
+    if (!type) {
+        return buildTypedStyle("#F00", "#E11")
     }
 
     switch (type) {
-        case "default":
+        case buttonTypes.DEFAULT:
         default:
-            return {
-                backgroundColor: "#42B983",
-                ":active": {
-                    backgroundColor: "#7CD0AA"
-                }
-            }
+            return buildTypedStyle("#42B983", "#7CD0AA")
     }
 }
 
 const Button = styled("button", ({type, styles}) => ({
-    ...chooseBackground(type),
+    ...setButtonType(type),
     color: "#FFF",
     padding: "5px 10px",
     border: "none",
@@ -35,8 +40,10 @@ const Button = styled("button", ({type, styles}) => ({
 }))
 
 Button.propTypes = {
-    type: PropTypes.string.isRequired,
+    type: buildEnumValidator("Button", buttonTypes),
     styles: PropTypes.object
 }
+
+export const ButtonType = buttonTypes
 
 export default Button

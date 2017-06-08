@@ -1,11 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { ModalWindow } from "@/elements"
+import { WindowLayer } from "@/elements"
 
 const TestWindow = ({ settings }) => (
-    <ModalWindow title="Test" settings={settings}>
+    <WindowLayer title="Test" settings={settings}>
         <h1>Test Window</h1>
-    </ModalWindow>
+    </WindowLayer>
 )
 
 TestWindow.propTypes = {
