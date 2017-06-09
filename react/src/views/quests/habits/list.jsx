@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { NONE } from "@/store/habits/habit-scales"
 import { setExpandedHabits } from "@/store/application/habits/actions"
-import { QuestList } from "@/elements"
+import QuestList from "@/views/quests/quest-list"
 import HabitItem from "./item"
 
 let HabitList = ({ expanded, habits, onToggleExpanded }) => {

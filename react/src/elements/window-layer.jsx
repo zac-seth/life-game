@@ -6,7 +6,9 @@ import Draggable from "react-draggable"
 import LayerType from "@/store/application/layers/layer-types"
 import { bringLayerToTop } from "@/store/application/layers/actions"
 import { randomId } from "@/utils/strings"
-import { Panel, Text, TitleBar } from "@/elements"
+import Panel from "@/elements/panel"
+import Text from "@/elements/text"
+import TitleBar from "@/elements/title-bar"
 
 const WindowLayerFrame = styled("div", ({ layer }) => {
     const indent = ( layer + 1 ) * 100

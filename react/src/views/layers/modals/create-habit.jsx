@@ -1,10 +1,10 @@
 import React from "react"
 import ModalLayer from "@/elements/modal-layer"
-import Text from "@/elements/text"
+import CreateHabit from "@/views/quests/habits/create"
 
 const CreateHabitLayer = () => (
     <ModalLayer title="Create Habit" name="createHabit">
-        <Text>Create your habits here</Text>
+        <CreateHabit />
     </ModalLayer>
 )
 

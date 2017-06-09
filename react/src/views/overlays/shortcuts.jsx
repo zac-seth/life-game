@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { toggleLayerVisibility } from "@/store/application/layers/actions"
 import LayerType from "@/store/application/layers/layer-types"
 import Button, { ButtonType } from "@/elements/button"
-import { Overlay } from "@/elements"
+import Overlay from "@/elements/overlay"
 
 const buttonStyles = {
     marginLeft: "10px"

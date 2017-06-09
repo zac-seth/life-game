@@ -20,7 +20,7 @@ const scaleFilterOptions = [
 
 const buttonStyles = {}
 
-let HabitListFilter = ({ 
+let HabitListActions = ({ 
     scaleFilter, 
     showExpandedDetails, 
     onOpen, 
@@ -52,7 +52,7 @@ let HabitListFilter = ({
     )
 }
 
-HabitListFilter.propTypes = {
+HabitListActions.propTypes = {
     scaleFilter: PropTypes.string.isRequired,
     showExpandedDetails: PropTypes.bool.isRequired,
     
@@ -76,10 +76,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onSwitchDetailExpansion: expanded => dispatch(setExpandedHabits(expanded))
 })
 
-HabitListFilter = connect(mapStateToProps, mapDispatchToProps)(HabitListFilter)
+HabitListActions = connect(mapStateToProps, mapDispatchToProps)(HabitListActions)
 
-HabitListFilter.propTypes = {
+HabitListActions.propTypes = {
 
 }
 
-export default HabitListFilter
+export default HabitListActions

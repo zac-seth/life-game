@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
-import { Text } from "@/elements"
+import Text from "@/elements/text"
 
 const CreateHabit = () => {
 

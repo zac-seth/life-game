@@ -1,7 +1,7 @@
 import React from "react"
 import { styled } from "styletron-react"
 import Wallpaper from "@/wallpaper"
-import { PageFrame } from "@/elements"
+import PageFrame from "@/elements/page-frame"
 import Shortcuts from "@/views/overlays/shortcuts"
 import CreateHabitModal from "@/views/layers/modals/create-habit"
 import HabitsWindow from "@/views/layers/windows/habits"

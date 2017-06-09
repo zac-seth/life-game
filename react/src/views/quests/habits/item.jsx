@@ -1,5 +1,6 @@
 import React from "react"
-import { Text, QuestListItem } from "@/elements"
+import Text from "@/elements/text"
+import QuestListItem from "@/views/quests/quest-list-item"
 
 const HabitItem = ({ habit, expanded }) => (
     <QuestListItem>
