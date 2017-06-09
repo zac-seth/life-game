@@ -2,10 +2,13 @@ import React from "react"
 import { styled } from "styletron-react"
 import Wallpaper from "@/wallpaper"
 import PageFrame from "@/elements/page-frame"
-import Shortcuts from "@/views/overlays/shortcuts"
-import CreateHabitModal from "@/views/layers/modals/create-habit"
-import HabitsWindow from "@/views/layers/windows/habits"
-import TestWindow from "@/views/layers/windows/test"
+import Shortcuts from "@/views/widgets/shortcuts"
+
+// Modals
+import CreateHabitModal from "@/views/quests/habits/create/modal"
+
+// Windows
+import HabitListWindow from "@/views/quests/habits/list/window"
 
 const AppContainer = styled("div", {
     position: "absolute",
@@ -21,9 +24,14 @@ let App = () => (
     <AppContainer>
         <Wallpaper />
         <PageFrame />
+
+        {/* Widgets */}
         <Shortcuts snap="bottom-right" />
-        <HabitsWindow  />
-        <TestWindow />
+
+        {/* Windows */}
+        <HabitListWindow  />
+
+        {/* Modals */}
         <CreateHabitModal />
     </AppContainer>
 )

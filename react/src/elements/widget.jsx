@@ -30,7 +30,7 @@ function applySnap(snap) {
     return result
 }
 
-const Overlay = styled("div", ({snap}) => ({
+const Widget = styled("div", ({snap}) => ({
     ...applySnap(snap),
     position: "absolute",
     backgroundColor: "#FFF",
@@ -38,8 +38,8 @@ const Overlay = styled("div", ({snap}) => ({
     zIndex: 50
 }))
 
-Overlay.propTypes = {
+Widget.propTypes = {
     snap: PropTypes.string.isRequired
 }
 
-export default Overlay
+export default Widget

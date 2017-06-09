@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { toggleLayerVisibility } from "@/store/application/layers/actions"
 import LayerType from "@/store/application/layers/layer-types"
 import Button, { ButtonType } from "@/elements/button"
-import Overlay from "@/elements/overlay"
+import Widget from "@/elements/widget"
 
 const buttonStyles = {
     marginLeft: "10px"
@@ -16,10 +16,9 @@ const firstButtonStyles = {
 }
 
 let Shortcuts = props => ( // TODO: Replace open names with some kind of const.
-    <Overlay {...props}>
+    <Widget {...props}>
         <Button type={ButtonType.SHORTCUT} styles={firstButtonStyles} onClick={() => props.onToggle("habits")}>Habits</Button>
-        <Button type={ButtonType.SHORTCUT} styles={buttonStyles} onClick={() => props.onToggle("test")}>Test 1</Button>
-    </Overlay>
+    </Widget>
 )
 
 Shortcuts.propTypes = {

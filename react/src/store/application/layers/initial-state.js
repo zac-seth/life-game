@@ -7,8 +7,7 @@ export default deepFreeze({
             createHabit: false
         },
         window: {
-            habits: false,
-            test: false
+            habits: false
         }
     }
 })
