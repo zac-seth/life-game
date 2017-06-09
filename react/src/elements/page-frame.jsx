@@ -1,7 +1,7 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Switch, Route } from "react-router-dom"
 import { styled } from "styletron-react"
+import routes from "@/routes"
 
 const PageFrameContainer = styled("div", {
     position: "absolute",
@@ -13,16 +13,12 @@ const PageFrameContainer = styled("div", {
     zIndex: 2
 })
 
-const PageFrame = ({ routes }) => (
+const PageFrame = () => (
     <PageFrameContainer>
         <Switch>
             {routes.map((route, i) => <Route key={i} {...route} />)}
         </Switch>
     </PageFrameContainer>
 )
-
-PageFrame.propTypes = {
-    routes: PropTypes.array.isRequired
-}
 
 export default PageFrame

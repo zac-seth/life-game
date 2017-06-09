@@ -1,7 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { connect } from "react-redux"
 import { styled } from "styletron-react"
 import Draggable from "react-draggable"
+import LayerType from "@/store/application/layers/layer-types"
 import { randomId } from "@/utils/strings"
 import { Panel, Text, TitleBar } from "@/elements"
 
@@ -23,7 +25,7 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
     }
 })
 
-const WindowLayer = ({ children, title, settings }) => {
+let WindowLayer = ({ children, title, settings }) => {
     if (!settings.show) {
         return null;
     }
@@ -51,6 +53,27 @@ WindowLayer.propTypes = {
         layer: PropTypes.number.isRequired,
         show: PropTypes.bool.isRequired
     })
+}
+
+const mapStateToProps = (state, { title, name }) => {
+    const { layers } = state.application
+    const show = layers.types.window[name]
+    const layer = layers.stack.find(layer => layer.type === LayerType.WINDOW && layer.name === name)
+
+    return {
+        title,
+        settings: {
+            show,
+            layer: layer ? layers.stack.indexOf(layer) : -1
+        }
+    }
+}
+
+WindowLayer = connect(mapStateToProps)(WindowLayer)
+
+WindowLayer.propTypes = {
+    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
 }
 
 export default WindowLayer
