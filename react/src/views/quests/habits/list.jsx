@@ -3,18 +3,21 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { NONE } from "@/store/habits/habit-scales"
 import { setExpandedHabits } from "@/store/application/habits/actions"
+import Text from "@/elements/text"
 import QuestList from "@/views/quests/quest-list"
-import HabitItem from "./item"
+import QuestListItem from "@/views/quests/quest-list-item"
 
-let HabitList = ({ expanded, habits, onToggleExpanded }) => {
-    const items = habits.map(habit => <HabitItem expanded={expanded} habit={habit} key={habit.id} />)
-    
-    return (
-        <QuestList>
-            {items}
-        </QuestList>
-    )
-}
+let HabitList = ({ expanded, habits, onToggleExpanded }) => (
+    <QuestList>
+        {habits.map(habit => (
+            <QuestListItem key={habit.id}>
+                <Text>{habit.name}</Text>
+                {expanded && <Text>{habit.desc}</Text>}
+                {expanded && <Text>Scale: {habit.scale.toLowerCase()}</Text>}
+            </QuestListItem>
+        ))}
+    </QuestList>
+)
 
 HabitList.propTypes = {
     expanded: PropTypes.bool.isRequired,

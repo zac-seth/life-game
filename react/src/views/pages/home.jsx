@@ -1,11 +1,11 @@
 import React from "react"
 import Text from "@/elements/text"
-import Window from "@/elements/window"
+import Page from "@/elements/page"
 
 const Home = () => (
-    <Window>
+    <Page>
         <Text header>Welcome to YouQuest</Text>
-    </Window>
+    </Page>
 )
 
 Home.propTypes = {}

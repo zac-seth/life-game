@@ -1,8 +1,6 @@
 import React from "react"
-import {
-    Home,
-    NotFound
-} from "@/views/windows"
+import Home from "@/views/pages/home"
+import NotFound from "@/views/pages/not-found"
 
 export default [
     {

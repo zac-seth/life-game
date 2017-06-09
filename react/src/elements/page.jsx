@@ -1,7 +1,7 @@
 import React from "react"
 import {styled} from "styletron-react"
 
-const WindowContainer = styled("section", {
+const PageContainer = styled("section", {
     position: "absolute",
     top: 0,
     bottom: 0,
@@ -12,12 +12,12 @@ const WindowContainer = styled("section", {
     background: "rgba(255, 255, 255, 0.8)"
 })
 
-const Window = props => (
-    <WindowContainer>
+const Page = props => (
+    <PageContainer>
         {props.children}
-    </WindowContainer>
+    </PageContainer>
 )
 
-Window.propTypes = {}
+Page.propTypes = {}
 
-export default Window
+export default Page
