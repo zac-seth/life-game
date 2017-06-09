@@ -1,6 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
+import Draggable from "react-draggable"
+import { randomId } from "@/utils/strings"
 import { Panel, Text, TitleBar } from "@/elements"
 
 const WindowLayerFrame = styled("div", ({ layer }) => {
@@ -10,11 +12,13 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
         backgroundColor: "#FFF",
         flex: "0 0 640px",
         width: "640px",
-        height: "320px",
+        height: "360px",
         boxShadow: "3px 3px 3px 0 #BBB",
         position: "absolute",
-        top: `${indent}px`,
-        left: `${indent}px`,
+        top: `50%`,
+        left: `50%`,
+        marginLeft: "-320px",
+        marginTop: "-180px",
         zIndex: 1000 + indent
     }
 })
@@ -24,15 +28,20 @@ const WindowLayer = ({ children, title, settings }) => {
         return null;
     }
 
+    const titleBarId = `window-title-${randomId()}`
+
     return (
-        <WindowLayerFrame layer={settings.layer} draggable>
-            <TitleBar>
-                <Text header>{title}</Text>
-            </TitleBar>
-            <Panel>
+        <Draggable
+            axis="both"
+            bounds="body"
+            handle={`#${titleBarId}`}>
+            <WindowLayerFrame layer={settings.layer}>
+                <TitleBar id={titleBarId}>
+                    <Text header>{title}</Text>
+                </TitleBar>
                 {children}
-            </Panel>
-        </WindowLayerFrame>
+            </WindowLayerFrame>
+        </Draggable>
     )
 }
 

@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
-import random from "randomstring"
+import { randomId } from "@/utils/strings"
 import { buildEnumValidator } from "@/utils/custom-prop-types"
 import InputGroup from "./input-group"
 import Text from "./text"
@@ -17,10 +17,7 @@ const DropDown = styled("select", ({  }) => {
 DropDown.propTypes = {}
 
 const OptionPicker = props => {
-    const inputName = random.generate({
-        length: 6,
-        charset: "alphanumeric"
-    })
+    const inputName = randomId()
 
     if (props.mode === modes.SINGLE) {
         return (

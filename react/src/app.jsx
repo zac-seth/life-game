@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { styled } from "styletron-react"
 import { toggleLayerVisibility } from "@/store/application/layers/actions"
-import layerTypes from "@/store/application/layers/layer-types"
+import LayerType from "@/store/application/layers/layer-types"
 import routes from "@/routes"
 import Wallpaper from "@/wallpaper"
 import { PageFrame } from "@/elements"
@@ -54,7 +54,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
     onToggleShortcut: name => {
-        dispatch(toggleLayerVisibility({ type: layerTypes.WINDOW, name }))
+        dispatch(toggleLayerVisibility({ type: LayerType.WINDOW, name }))
     }
 })
 
@@ -65,7 +65,7 @@ export default App
 function mapWindowSettings(state, name) {
     const { layers } = state.application
     const show = layers.types.window[name]
-    const layer = layers.stack.find(layer => layer.type === layerTypes.WINDOW && layer.name === name)
+    const layer = layers.stack.find(layer => layer.type === LayerType.WINDOW && layer.name === name)
 
     return {
         show: show,

@@ -6,7 +6,10 @@ const ActionStrip = styled("div", {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignContent: "stretch"
+    alignContent: "stretch",
+    height: "64px",
+    padding: "10px",
+    borderBottom: "1px solid #DDD"
 })
 
 ActionStrip.PropTypes = {}

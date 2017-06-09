@@ -1,12 +1,6 @@
 import button from "./button"
 export const Button = button
 
-import checkBox from "./check-box"
-export const CheckBox = checkBox
-
-import filterGroup from "./filter-group"
-export const FilterGroup = filterGroup
-
 import inputGroup from "./input-group"
 export const InputGroup = inputGroup
 

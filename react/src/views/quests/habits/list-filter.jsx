@@ -1,6 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
+import { toggleLayerVisibility } from "@/store/application/layers/actions"
+import LayerType from "@/store/application/layers/layer-types"
 import { setExpandedHabits, setScaleFilter } from "@/store/application/habits/actions"
 import * as scales from "@/store/habits/habit-scales"
 import ActionStrip, { ActionGroup } from "@/elements/action-strip"
