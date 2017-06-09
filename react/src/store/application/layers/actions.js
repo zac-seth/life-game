@@ -4,6 +4,18 @@ import layerTypes from "./layer-types"
 
 const { mutations } = names
 
+export function bringLayerToTop(layer) {
+    return function (dispatch, getState) {
+        const layers = getState().application.layers
+        
+        if (isLayerShown(layers, layer.type, layer.name)) {
+            dispatch(createAction(mutations.BRING_LAYER_TO_TOP_OF_STACK, layer))
+        }
+
+        return Promise.resolve()
+    }
+}
+
 export function toggleLayerVisibility(layer) {
     return function(dispatch, getState) {
         const layers = getState().application.layers,
@@ -14,7 +26,7 @@ export function toggleLayerVisibility(layer) {
                 const topLayer = getTopLayerFromStack(stack)
 
                 if (!canStackLayer(layer, topLayer)) {
-                    return Promise.reject({ message: `Attempted to add a ${layer.type} on top of a ${topLayer.type}.` })
+                    return Promise.reject({ message: `Attempted to add a ${layer.type} layer over of a ${topLayer.type} layer.` })
                 }
             }
 

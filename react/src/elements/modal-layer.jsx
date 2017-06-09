@@ -16,7 +16,8 @@ const ModalLayerBackdrop = styled("div", {
     display: "flex",
     alignContent: "center",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
 })
 
 const ModalLayerFrame = styled("div", {

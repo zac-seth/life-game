@@ -8,20 +8,30 @@ export default createReducer({
     [mutations.ADD_LAYER_TO_STACK]({ stack, types }, layer) {
         return {
             stack: [...stack, layer],
-            types: { ...types }
+            types
+        }
+    },
+
+    [mutations.BRING_LAYER_TO_TOP_OF_STACK]({ stack, types }, layer) {
+        return {
+            stack: [
+                ...removeLayerFromStack(stack, layer),
+                layer
+            ],
+            types
         }
     },
 
     [mutations.REMOVE_LAYER_FROM_STACK]({ stack, types }, { type, name }) {
         return {
-            stack: stack.filter(layer => layer.type !== type || layer.name !== name),
-            types: { ...types }
+            stack: removeLayerFromStack(stack, layer),
+            types
         }
     },
 
     [mutations.SET_LAYER_VISIBILITY]({ stack, types }, { type, name }) {
         return {
-            stack: [...stack],
+            stack,
             types: {
                 ...types,
                 [type]: {
@@ -32,3 +42,7 @@ export default createReducer({
         }
     }
 }, initialState)
+
+function removeLayerFromStack(stack, layer) {
+    return stack.filter(item => item.type !== layer.type || item.name !== layer.name)
+}
