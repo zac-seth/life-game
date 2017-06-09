@@ -2,6 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { styled } from "styletron-react"
+import { toggleLayerVisibility } from "@/store/application/layers/actions"
+import LayerType from "@/store/application/layers/layer-types"
 import Panel from "@/elements/panel"
 import Text from "@/elements/text"
 import TitleBar from "@/elements/title-bar"
@@ -17,7 +19,7 @@ const ModalLayerBackdrop = styled("div", {
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)"
 })
 
 const ModalLayerFrame = styled("div", {
@@ -27,13 +29,13 @@ const ModalLayerFrame = styled("div", {
     height: "270px"
 })
 
-let ModalLayer = ({ children, title, settings }) => {
+let ModalLayer = ({ children, settings, title, onClose }) => {
     if (!settings.show) {
         return null
     }
 
     return (
-        <ModalLayerBackdrop>
+        <ModalLayerBackdrop onClick={onClose}>
             <ModalLayerFrame>
                 <TitleBar>
                     <Text header>{title}</Text>
@@ -47,10 +49,12 @@ let ModalLayer = ({ children, title, settings }) => {
 }
 
 ModalLayer.propTypes = {
-    title: PropTypes.string.isRequired,
     settings: PropTypes.shape({
         show: PropTypes.bool.isRequired
-    }).isRequired
+    }).isRequired,
+    title: PropTypes.string.isRequired,
+
+    onClose: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, { title, name }) => ({
@@ -60,7 +64,9 @@ const mapStateToProps = (state, { title, name }) => ({
     }
 })
 
-const mapDispatchToProps = (state, {}) => ({})
+const mapDispatchToProps = (dispatch, { name }) => ({
+    onClose: () => dispatch(toggleLayerVisibility({ name, type: LayerType.MODAL }))
+})
 
 ModalLayer = connect(mapStateToProps, mapDispatchToProps)(ModalLayer)
 

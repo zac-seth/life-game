@@ -13,16 +13,20 @@ export default createReducer({
     },
 
     [mutations.BRING_LAYER_TO_TOP_OF_STACK]({ stack, types }, layer) {
+        const filteredStack = removeLayerFromStack(stack, layer)
+        const sliceIndex = stack.lastIndexOf(stack.find(item => item.type === layer.type))
+
         return {
             stack: [
-                ...removeLayerFromStack(stack, layer),
-                layer
+                ...filteredStack.slice(0, sliceIndex - 1),
+                layer,
+                ...filteredStack.slice(sliceIndex + 1)
             ],
             types
         }
     },
 
-    [mutations.REMOVE_LAYER_FROM_STACK]({ stack, types }, { type, name }) {
+    [mutations.REMOVE_LAYER_FROM_STACK]({ stack, types }, layer) {
         return {
             stack: removeLayerFromStack(stack, layer),
             types
