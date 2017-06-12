@@ -36,6 +36,11 @@ const Button = styled("button", ({type, styles}) => ({
     border: "none",
     borderRadius: 0,
     outline: "none",
+
+    ":hover": {
+        cursor: "pointer"
+    },
+
     ...(styles || {})
 }))
 

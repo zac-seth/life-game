@@ -2,33 +2,39 @@ import React from "react"
 import PropTypes from "prop-types"
 import {styled} from "styletron-react"
 
-const Header = styled("h1", props => ({
-    fontFamily: "'Exo 2', Helvetica, Arial, Sans-Serif",
+const headerFont = "'Exo 2', Helvetica, Arial, Sans-Serif"
+const contentFont = "Lato, Helvetica, Arial, Sans-Serif"
+
+const HeaderText = styled("h1", props => ({
+    fontFamily: headerFont,
     fontSize: "2em"
 }))
 
-const Label = styled("label", props => ({
-    fontFamily: "Lato, Helvetica, Arial, Sans-Serif",
+const LabelText = styled("label", props => ({
+    fontFamily: contentFont,
     fontSize: "0.8em"
 }))
 
-const Paragraph = styled("p", props => ({
-    fontFamily: "Lato, Helvetica, Arial, Sans-Serif",
+const ParagraphText = styled("p", props => ({
+    fontFamily: contentFont,
     fontSize: "1.2em"
 }))
 
+const InputText = styled("span", {
+    fontFamily: contentFont,
+    fontSize: "0.8em"
+})
+
 function chooseElementType(props) {
     if (props.header) {
-        return <Header>{props.children}</Header>
-    } if (props.label) {
-        if (!props.for) {
-            console.warn("A label text component was created without a target.")
-        }
-
-        return <Label for={props.for}>{props.children}</Label>
+        return <HeaderText>{props.children}</HeaderText>
+    } else if (props.label) {
+        return <LabelText for={props.for}>{props.children}</LabelText>
+    } else if (props.input) {
+        return <InputText>{props.children}</InputText>
     }
 
-    return <Paragraph>{props.children}</Paragraph>
+    return <ParagraphText>{props.children}</ParagraphText>
 }
 
 const Text = props => {
@@ -41,8 +47,8 @@ const Text = props => {
 
 Text.propTypes = {
     header: PropTypes.bool,
-    label: PropTypes.bool,
-    for: PropTypes.string
+    for: PropTypes.string,
+    label: PropTypes.bool
 }
 
 export default Text

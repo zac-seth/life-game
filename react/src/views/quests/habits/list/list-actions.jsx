@@ -7,8 +7,8 @@ import { setExpandedHabits, setScaleFilter } from "@/store/application/habits/ac
 import * as scales from "@/store/habits/habit-scales"
 import ActionStrip, { ActionGroup } from "@/elements/action-strip"
 import Button, { ButtonType } from "@/elements/button"
+import DropDown from "@/elements/drop-down"
 import OnOffSwitch from "@/elements/on-off-switch"
-import OptionPicker from "@/elements/option-picker"
 
 const scaleFilterOptions = [
     { label: "Any Time", value: scales.NONE },
@@ -37,11 +37,10 @@ let HabitListActions = ({
                 <Button type={ButtonType.DEFAULT} styles={buttonStyles} onClick={onOpen}>Create</Button>
             </ActionGroup>
             <ActionGroup align="right">
-                <OptionPicker 
-                    label="Show habits recurring " 
-                    options={scaleFilterOptions} 
-                    mode={OptionPicker.mode.SINGLE} 
-                    selectedIndex={scaleFilterOptionIndex} 
+                <DropDown
+                    label="Show habits recurring "
+                    options={scaleFilterOptions}
+                    selectedIndex={scaleFilterOptionIndex}
                     onSelectionMade={onScaleFilterSelected} />
                 <OnOffSwitch
                     label="Show full details"

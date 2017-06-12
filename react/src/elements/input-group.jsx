@@ -7,7 +7,8 @@ const InputGroup = styled("div", {
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    alignContent: "center"
+    alignContent: "center",
+    marginLeft: "5px"
 })
 
 InputGroup.propTypes = {}

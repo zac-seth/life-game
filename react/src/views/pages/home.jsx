@@ -1,6 +1,7 @@
 import React from "react"
 import Text from "@/elements/text"
 import Page from "@/elements/page"
+import * as scales from "@/store/habits/habit-scales"
 
 const Home = () => (
     <Page>

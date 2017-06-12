@@ -4,17 +4,17 @@ import { styled } from "styletron-react"
 import InputGroup from "./input-group"
 import Text from "./text"
 
-const SwitchContainer = styled("div", {
+const SwitchContainer = styled("div", ({ hasLabel }) => ({
     position: "relative",
     display: "inline-block",
     width: "48px",
     height: "24px",
     border: "2px solid #999",
     padding: "2px",
-    marginLeft: "5px",
+    marginLeft: hasLabel ? "5px" : 0,
     backgroundColor: "#FFF",
     cursor: "pointer"
-})
+}))
 
 const SwitchBody = styled("div", {
     backgroundColor: "#DDD",
@@ -39,8 +39,8 @@ const Switch = styled("div", ({ isOn }) => {
 
 const OnOffSwitch = ({ label, isOn, onSwitched }) => (
     <InputGroup>
-        <Text label for="blah">{label}</Text>
-        <SwitchContainer onClick={() => onSwitched(!isOn)}>
+        <Text label>{label}</Text>
+        <SwitchContainer hasLabel={!!label} onClick={() => onSwitched(!isOn)}>
             <SwitchBody />
             <Switch isOn={isOn} />
         </SwitchContainer>
