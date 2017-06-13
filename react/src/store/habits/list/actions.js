@@ -1,8 +1,6 @@
 import { createAction } from "@/utils/store"
-import names from "@/store/names"
+import ActionType from "@/store/action-type"
 import { loadedHabits } from "./initial-state"
-
-const { mutations } = names
 
 export function createHabit(habit) {
     return (dispatch, getState) => {
@@ -16,7 +14,7 @@ export function createHabit(habit) {
         let newId = Math.max.apply(null, state.habits.map(h => h.id)) + 1
         let newHabit = { ...habit, id: newId }
 
-        dispatch(createAction(mutations.CREATE_HABIT, newHabit))
+        dispatch(createAction(ActionType.CREATE_HABIT, newHabit))
 
         return Promise.resolve()
     }
@@ -24,14 +22,14 @@ export function createHabit(habit) {
 
 export function loadHabits() {
     return dispatch => {
-        dispatch(createAction(mutations.SET_HABITS, loadedHabits))
+        dispatch(createAction(ActionType.SET_HABITS, loadedHabits))
 
         return Promise.resolve()
     }
 }
 
 export function setScaleFilter(scaleFilter) {
-    dispatch(createAction(mutations.SET_SCALE_FILTER, scaleFilter))
+    dispatch(createAction(ActionType.SET_SCALE_FILTER, scaleFilter))
 
     return Promise.resolve()
 }

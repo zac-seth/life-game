@@ -1,15 +1,13 @@
 import { createAction } from "@/utils/store"
-import names from "@/store/names"
+import ActionType from "@/store/action-type"
 import layerTypes from "./layer-types"
-
-const { mutations } = names
 
 export function bringLayerToTop(layer) {
     return function (dispatch, getState) {
         const layers = getState().application.layers
         
         if (isLayerShown(layers, layer.type, layer.name)) {
-            dispatch(createAction(mutations.BRING_LAYER_TO_TOP_OF_STACK, layer))
+            dispatch(createAction(ActionType.BRING_LAYER_TO_TOP_OF_STACK, layer))
         }
 
         return Promise.resolve()
@@ -30,11 +28,11 @@ export function toggleLayerVisibility(layer) {
                 }
             }
 
-            dispatch(createAction(mutations.ADD_LAYER_TO_STACK, layer))
-            dispatch(createAction(mutations.SET_LAYER_VISIBILITY, layer))
+            dispatch(createAction(ActionType.ADD_LAYER_TO_STACK, layer))
+            dispatch(createAction(ActionType.SET_LAYER_VISIBILITY, layer))
         } else if (stack.length) {
-            dispatch(createAction(mutations.SET_LAYER_VISIBILITY, layer))
-            dispatch(createAction(mutations.REMOVE_LAYER_FROM_STACK, layer))
+            dispatch(createAction(ActionType.SET_LAYER_VISIBILITY, layer))
+            dispatch(createAction(ActionType.REMOVE_LAYER_FROM_STACK, layer))
         }
 
         return Promise.resolve()

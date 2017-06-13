@@ -1,7 +1,5 @@
 import { createAction } from "@/utils/store"
-import names from "@/store/names"
-
-const { mutations } = names
+import ActionType from "@/store/action-type"
 
 export function setSelectedWallpaperIndex() {
     return function(dispatch, getState) {
@@ -13,7 +11,7 @@ export function setSelectedWallpaperIndex() {
             newIndex = 0
         }
 
-        dispatch(createAction(mutations.SET_WALLPAPER_INDEX, newIndex))
+        dispatch(createAction(ActionType.SET_WALLPAPER_INDEX, newIndex))
 
         return Promise.resolve()
     }

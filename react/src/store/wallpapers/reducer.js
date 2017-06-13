@@ -1,11 +1,9 @@
 import { createReducer } from "@/utils/store"
-import names from "@/store/names"
+import ActionType from "@/store/action-type"
 import initialState from "./initial-state"
 
-const { mutations } = names
-
 export default createReducer({
-    [mutations.SET_WALLPAPER_INDEX]({ images }, selectedIndex) {
+    [ActionType.SET_WALLPAPER_INDEX]({ images }, selectedIndex) {
         return {
             images,
             selectedIndex

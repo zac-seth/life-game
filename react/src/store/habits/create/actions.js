@@ -1,2 +1,2 @@
 import { createAction } from "@/utils/store"
-import names from "@/store/names"
+import ActionType from "@/store/action-type"

@@ -1,18 +1,16 @@
 import { createReducer } from "@/utils/store"
-import names from "@/store/names"
+import ActionType from "@/store/action-type"
 import initialState from "./initial-state"
 
-const { mutations } = names
-
 export default createReducer({
-    [mutations.ADD_LAYER_TO_STACK]({ stack, types }, layer) {
+    [ActionType.ADD_LAYER_TO_STACK]({ stack, types }, layer) {
         return {
             stack: [...stack, layer],
             types
         }
     },
 
-    [mutations.BRING_LAYER_TO_TOP_OF_STACK]({ stack, types }, layer) {
+    [ActionType.BRING_LAYER_TO_TOP_OF_STACK]({ stack, types }, layer) {
         const filteredStack = removeLayerFromStack(stack, layer)
         const sliceIndex = stack.lastIndexOf(stack.find(item => item.type === layer.type))
 
@@ -26,14 +24,14 @@ export default createReducer({
         }
     },
 
-    [mutations.REMOVE_LAYER_FROM_STACK]({ stack, types }, layer) {
+    [ActionType.REMOVE_LAYER_FROM_STACK]({ stack, types }, layer) {
         return {
             stack: removeLayerFromStack(stack, layer),
             types
         }
     },
 
-    [mutations.SET_LAYER_VISIBILITY]({ stack, types }, { type, name }) {
+    [ActionType.SET_LAYER_VISIBILITY]({ stack, types }, { type, name }) {
         return {
             stack,
             types: {
