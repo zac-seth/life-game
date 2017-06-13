@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
 
-const ActionStrip = styled("div", {
+const ActionStrip = styled("div", ({ align }) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -10,7 +10,7 @@ const ActionStrip = styled("div", {
     height: "64px",
     padding: "10px",
     borderBottom: "1px solid #DDD"
-})
+}))
 
 ActionStrip.PropTypes = {}
 
@@ -19,8 +19,7 @@ const ActionGroupComponent = styled("div", ({ align }) => ({
     flexDirection: "row",
     justifyContent: "space-between",
     alignContent: "center",
-    alignItems: "center",
-    margin: "5px"
+    alignItems: "center"
 }))
 
 ActionGroupComponent.propTypes = {

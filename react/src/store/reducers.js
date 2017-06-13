@@ -1,6 +1,6 @@
 import {combineReducers} from "redux"
 import application from "./application/reducers"
-import habits from "./habits/reducer"
+import habits from "./habits/reducers"
 import wallpapers from "./wallpapers/reducer"
 
 const rootReducer = combineReducers({

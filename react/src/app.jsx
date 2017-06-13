@@ -9,6 +9,7 @@ import CreateHabitModal from "@/views/quests/habits/create/modal"
 
 // Windows
 import HabitListWindow from "@/views/quests/habits/list/window"
+import BlahWindow from "@/views/blah/blah"
 
 const AppContainer = styled("div", {
     position: "absolute",
@@ -29,7 +30,8 @@ let App = () => (
         <Shortcuts snap="bottom-right" />
 
         {/* Windows */}
-        <HabitListWindow  />
+        <HabitListWindow />
+        <BlahWindow />
 
         {/* Modals */}
         <CreateHabitModal />

@@ -5,7 +5,9 @@ import { buildEnumValidator } from "@/utils/custom-prop-types"
 
 const buttonTypes = Object.freeze({
     DEFAULT: "default",
-    SHORTCUT: "shortcut"
+    SHORTCUT: "shortcut",
+    AFFIRMATIVE: "affirmative",
+    NEGATIVE: "negative"
 })
 
 function buildTypedStyle(normalBG, activeBg) {
@@ -23,6 +25,10 @@ function setButtonType(type) {
     }
 
     switch (type) {
+        case buttonTypes.AFFIRMATIVE:
+            return buildTypedStyle("#42B983", "#7CD0AA")
+        case buttonTypes.NEGATIVE:
+            return buildTypedStyle("#EC6C55", "#FE765E")
         case buttonTypes.DEFAULT:
         default:
             return buildTypedStyle("#42B983", "#7CD0AA")

@@ -18,6 +18,7 @@ const firstButtonStyles = {
 let Shortcuts = props => ( // TODO: Replace open names with some kind of const.
     <Widget {...props}>
         <Button type={ButtonType.SHORTCUT} styles={firstButtonStyles} onClick={() => props.onToggle("habits")}>Habits</Button>
+        <Button type={ButtonType.SHORTCUT} styles={buttonStyles} onClick={() => props.onToggle("blah")}>Blah</Button>
     </Widget>
 )
 

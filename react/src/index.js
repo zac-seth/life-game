@@ -6,7 +6,7 @@ import StyletronClient from "styletron-client"
 import { StyletronProvider } from "styletron-react"
 import App from "@/app"
 import configureStore from "@/store"
-import { loadHabits } from "@/store/habits/actions"
+import { loadHabits } from "@/store/habits/list/actions"
 import { setSelectedWallpaperIndex } from "@/store/wallpapers/actions"
 
 import "minireset.css"

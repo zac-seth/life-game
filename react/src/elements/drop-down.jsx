@@ -129,8 +129,8 @@ class DropDown extends React.Component {
                         {this.state.options.map(option =>
                             <DropDownItem key={option.value} onClick={() => this.handleSelectionMade(option)}>
                                 <Text input>{option.label ? option.label : option.value}</Text>
-                            </DropDownItem>)
-                        }
+                            </DropDownItem>
+                        )}
                     </DropDownList>
                 </DropDownContainer>
             </InputGroup>

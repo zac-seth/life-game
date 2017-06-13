@@ -34,7 +34,7 @@ const mapStateToProps = ({ application, habits }, ownProps) => {
     const scaleFilter = application.habits.scaleFilter
 
     return {
-        habits: scaleFilter === NONE ? habits : habits.filter(habit => habit.scale === scaleFilter),
+        habits: scaleFilter === NONE ? habits.list : habits.list.filter(habit => habit.scale === scaleFilter),
         expanded: application.habits.expanded
     }
 }
