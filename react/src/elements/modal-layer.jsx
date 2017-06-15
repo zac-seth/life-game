@@ -36,7 +36,7 @@ let ModalLayer = ({ children, settings, title, onClose }) => {
 
     return (
         <ModalLayerBackdrop onClick={onClose}>
-            <ModalLayerFrame>
+            <ModalLayerFrame onClick={evnt => evnt.stopPropagation()}>
                 <TitleBar>
                     <Text header>{title}</Text>
                 </TitleBar>

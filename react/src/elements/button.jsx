@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
-import { buildEnumValidator } from "@/utils/custom-prop-types"
+import { buildCustomPropEnumValidator } from "@/utils/props"
 
 const buttonTypes = Object.freeze({
     DEFAULT: "default",
@@ -51,7 +51,7 @@ const Button = styled("button", ({type, styles}) => ({
 }))
 
 Button.propTypes = {
-    type: buildEnumValidator("Button", buttonTypes),
+    type: buildCustomPropEnumValidator("Button", buttonTypes),
     styles: PropTypes.object
 }
 

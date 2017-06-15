@@ -6,6 +6,7 @@ import Draggable from "react-draggable"
 import LayerType from "@/store/application/layers/layer-types"
 import { bringLayerToTop } from "@/store/application/layers/actions"
 import { randomId } from "@/utils/strings"
+import { checkForPropChanges } from "@/utils/props"
 import Panel from "@/elements/panel"
 import Text from "@/elements/text"
 import TitleBar from "@/elements/title-bar"
@@ -28,43 +29,66 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
     }
 })
 
-let WindowLayer = ({ children, isTop, settings, title, onLayerActivated }) => {
-    if (!settings.show) {
-        return null;
+class WindowLayer extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            ...props,
+            titleBarId: ""
+        }
+
+        this.handleLayerActivation = this.handleLayerActivation.bind(this)
     }
 
-    const titleBarId = `window-title-${randomId()}`
-
-    const handleLayerActivation = (...args) => {
-        if (!isTop) {
-            onLayerActivated()
+    handleLayerActivation() {
+        if (!this.state.isTop) {
+            this.state.onLayerActivated()
         }
 
         return true
     }
 
-    return (
-        <Draggable
-            axis="both"
-            bounds="body"
-            handle={`#${titleBarId}`}
-            onStart={handleLayerActivation}>
-            <WindowLayerFrame layer={settings.layer} onClick={handleLayerActivation}>
-                <TitleBar id={titleBarId}>
-                    <Text header>{title}</Text>
-                </TitleBar>
-                {children}
-            </WindowLayerFrame>
-        </Draggable>
-    )
+    componentWillMount() {
+        this.setState({
+            titleBarId: `window-title-${randomId()}`
+        })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const newState = checkForPropChanges(nextProps, this.state)
+
+        if (newState) {
+            this.setState(newState)
+        }
+    }
+    
+    render() {
+        if (!this.state.show) {
+            return null;
+        }
+
+        return (
+            <Draggable
+                axis="both"
+                bounds="body"
+                handle={`#${this.state.titleBarId}`}
+                onStart={this.handleLayerActivation}>
+                <WindowLayerFrame layer={this.state.layer} onClick={this.handleLayerActivation}>
+                    <TitleBar id={this.state.titleBarId}>
+                        <Text header>{this.state.title}</Text>
+                    </TitleBar>
+                    {this.state.children}
+                </WindowLayerFrame>
+            </Draggable>
+        )
+    }
 }
 
 WindowLayer.propTypes = {
     isTop: PropTypes.bool.isRequired,
-    settings: PropTypes.shape({
-        layer: PropTypes.number.isRequired,
-        show: PropTypes.bool.isRequired
-    }),
+    layer: PropTypes.number.isRequired,
+    show: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired
 }
 
@@ -75,7 +99,8 @@ const mapStateToProps = (state, { title, name }) => {
 
     return {
         isTop: layer ? layers.stack[layers.stack.length - 1].name === name : false,
-        settings: { show, layer: layer ? layers.stack.indexOf(layer) : -1 },
+        show, 
+        layer: layer ? layers.stack.indexOf(layer) : -1,
         title
     }
 }

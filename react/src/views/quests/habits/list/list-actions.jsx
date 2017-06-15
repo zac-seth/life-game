@@ -8,6 +8,7 @@ import * as HabitScale from "@/store/habits/habit-scales"
 import ActionStrip, { ActionGroup } from "@/elements/action-strip"
 import Button, { ButtonType } from "@/elements/button"
 import DropDown from "@/elements/drop-down"
+import Input from "@/elements/input"
 import OnOffSwitch from "@/elements/on-off-switch"
 
 const scaleFilterOptions = [
@@ -38,12 +39,14 @@ let HabitListActions = ({
             </ActionGroup>
             <ActionGroup align="right">
                 <DropDown
-                    label="Show habits recurring "
+                    label="Show habits recurring"
+                    mode={Input.displayMode.INLINE}
                     options={scaleFilterOptions}
                     selectedIndex={scaleFilterOptionIndex}
                     onSelectionMade={onScaleFilterSelected} />
                 <OnOffSwitch
                     label="Show full details"
+                    mode={Input.displayMode.INLINE}
                     isOn={showExpandedDetails}
                     onSwitched={onSwitchDetailExpansion} />
             </ActionGroup>

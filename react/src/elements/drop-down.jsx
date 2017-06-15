@@ -2,8 +2,9 @@ import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
 import { MdKeyboardArrowDown } from "react-icons/lib/md"
-import InputGroup from "@/elements/input-group"
-import Text from "@/elements/text"
+import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/props"
+import Input from "./input"
+import Text from "./text"
 
 const DropDownContainer = styled("div", ({ hasLabel }) => ({
     position: "relative",
@@ -61,25 +62,17 @@ class DropDown extends React.Component {
         this.handleOutsideClick = this.handleOutsideClick.bind(this)
         this.handleToggleList = this.handleToggleList.bind(this)
 
-        const { 
-            label, 
-            options, 
-            selectedIndex, 
-            onSelectionMade 
-        } = props
-        const formattedOptions = options.map(option => ({
+        const formattedOptions = props.options.map(option => ({
             value: option.value,
             label: option.label ? option.label : option.value
         }))
-        const selectedOption = formattedOptions[selectedIndex]
+        const selectedOption = formattedOptions[props.selectedIndex]
 
         this.state = {
+            ...props,
             isOpen: false,
-            label,
             options: formattedOptions,
-            selectedOption,
-
-            onSelectionMade
+            selectedOption
         }
     }
 
@@ -120,8 +113,7 @@ class DropDown extends React.Component {
 
     render() {
         return (
-            <InputGroup>
-                <Text label>{this.state.label}</Text>
+            <Input label={this.state.label} mode={this.state.mode} message={!!this.state.model && this.state.model.message}>
                 <DropDownContainer onClick={this.handleToggleList} hasLabel={!!this.state.label}>
                     <SelectedItem><Text input>{this.state.selectedOption.label}</Text></SelectedItem>
                     <DropDownArrow />
@@ -133,13 +125,15 @@ class DropDown extends React.Component {
                         )}
                     </DropDownList>
                 </DropDownContainer>
-            </InputGroup>
+            </Input>
         )
     }
 }
 
 DropDown.propTypes = {
-    label: PropTypes.string, 
+    label: PropTypes.string,
+    mode: buildCustomPropEnumValidator("DropDown", Input.displayMode, false),
+    model: buildFormInputModelShape("DropDown"),
     options: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         value: PropTypes.oneOfType([

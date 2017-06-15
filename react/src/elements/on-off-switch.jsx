@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
-import InputGroup from "./input-group"
+import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/props"
+import Input from "./input"
 import Text from "./text"
 
 const SwitchContainer = styled("div", ({ hasLabel }) => ({
@@ -37,19 +38,21 @@ const Switch = styled("div", ({ isOn }) => {
     }
 })
 
-const OnOffSwitch = ({ label, isOn, onSwitched }) => (
-    <InputGroup>
-        <Text label>{label}</Text>
+const OnOffSwitch = ({ isOn, label, mode, model, onSwitched }) => (
+    <Input label={label} mode={mode} message={!!model && model.message}>
         <SwitchContainer hasLabel={!!label} onClick={() => onSwitched(!isOn)}>
             <SwitchBody />
             <Switch isOn={isOn} />
         </SwitchContainer>
-    </InputGroup>
+    </Input>
 )
 
 OnOffSwitch.PropTypes = {
-    label: PropTypes.string.isRequired,
     isOn: PropTypes.bool.isRequired,
+    label: PropTypes.string.isRequired,
+    mode: buildCustomPropEnumValidator("OnOffSwitch", Input.displayMode, false),
+    model: buildFormInputModelShape("OnOffSwitch"),
+
     onSwitched: PropTypes.func.isRequired
 }
 
