@@ -1,8 +1,11 @@
 import { createReducer } from "@/utils/store"
 import ActionType from "@/store/action-type"
-import initialState from "./initial-state"
+import initialState, { getDefaultCreateState } from "./initial-state"
 
 export default createReducer({
+    [ActionType.CLEAR_CREATE_STATE](habitCreate) {
+        return getDefaultCreateState()
+    },
     [ActionType.SET_INVALID_HABIT_NAME](habitCreate, name) {
         return { ...habitCreate, name }
     },

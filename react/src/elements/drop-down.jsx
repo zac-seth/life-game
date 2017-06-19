@@ -6,7 +6,7 @@ import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/
 import Input from "./input"
 import Text from "./text"
 
-const DropDownContainer = styled("div", ({ hasLabel }) => ({
+const DropDownContainer = styled("div", () => ({
     position: "relative",
     display: "flex",
     flexDirection: "row",
@@ -16,7 +16,6 @@ const DropDownContainer = styled("div", ({ hasLabel }) => ({
     minWidth: "120px",
     height: "24px",
     border: "2px solid #999",
-    marginLeft: hasLabel ? "5px" : 0,
 
     ":hover": {
         cursor: "pointer"
@@ -114,7 +113,7 @@ class DropDown extends React.Component {
     render() {
         return (
             <Input label={this.state.label} mode={this.state.mode} message={!!this.state.model && this.state.model.message}>
-                <DropDownContainer onClick={this.handleToggleList} hasLabel={!!this.state.label}>
+                <DropDownContainer onClick={this.handleToggleList}>
                     <SelectedItem><Text input>{this.state.selectedOption.label}</Text></SelectedItem>
                     <DropDownArrow />
                     <DropDownList isOpen={this.state.isOpen}>

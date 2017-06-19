@@ -35,7 +35,7 @@ function setButtonType(type) {
     }
 }
 
-const Button = styled("button", ({type, styles}) => ({
+const Button = styled("button", ({ type, styles }) => ({
     ...setButtonType(type),
     color: "#FFF",
     padding: "5px 10px",

@@ -4,14 +4,8 @@ import { loadedHabits } from "./initial-state"
 
 export function createHabit(habit) {
     return (dispatch, getState) => {
-        let validation = isValidHabit(habit)
-
-        if (validation.failed) {
-            return Promise.reject(validation.errors)
-        }
-        
-        const state = getState()
-        let newId = Math.max.apply(null, state.habits.map(h => h.id)) + 1
+        const { habits } = getState()
+        let newId = habits.list.length > 0 ? Math.max.apply(null, habits.list.map(h => h.id)) + 1 : 1
         let newHabit = { ...habit, id: newId }
 
         dispatch(createAction(ActionType.CREATE_HABIT, newHabit))
@@ -32,20 +26,4 @@ export function setScaleFilter(scaleFilter) {
     dispatch(createAction(ActionType.SET_SCALE_FILTER, scaleFilter))
 
     return Promise.resolve()
-}
-
-function isValidHabit(habit) {
-    let validation = { errors: [], failed: false }
-
-    // TODO: Create validation util module.
-    if (!habit.name) {
-        validation.failed = true
-        validation.errors.push({ prop: "name", message: "Please provide a name" })
-    }
-    if (!habit.desc) {
-        validation.failed = true
-        validation.errors.push({ prop: "desc", message: "Please provide a description" })
-    }
-
-    return validation
 }

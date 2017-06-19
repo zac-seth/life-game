@@ -28,7 +28,8 @@ const LabelText = styled("label", props => {
 
 const ParagraphText = styled("p", props => ({
     fontFamily: contentFont,
-    fontSize: "1.2em"
+    fontSize: "1em",
+    marginBottom: "0.5em"
 }))
 
 const ValidationText = styled("span", ({ type }) => ({
@@ -74,6 +75,14 @@ Text.propTypes = {
     label: PropTypes.bool,
     validation: PropTypes.string,
     width: PropTypes.string
+}
+
+export const Types = {
+    Header: HeaderText,
+    Input: InputText,
+    Label: LabelText,
+    Paragraph: ParagraphText,
+    Validation: ValidationText
 }
 
 export default Text

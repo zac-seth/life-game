@@ -6,24 +6,30 @@ import Input from "./input"
 import Text from "./text"
 
 const commonStyles = {
-    margin: "0 5px",
     border: "2px solid #999",
     padding: "5px",
     fontSize: "0.8em",
     fontFamily: "Lato, Helvetica, Arial, Sans-Serif",
-    lineHeight: "1em"
+    lineHeight: "1em",
+    outline: "none",
+
+    ":focus": {
+        borderColor: "#4271B9"
+    }
 }
 
 const SingleLineTextBox = styled("input", {
     ...commonStyles,
     height: "24px",
-    width: "200px"
+    minWidth: "200px",
+    width: "100%"
 })
 
 const MultiLineTextBox = styled("textarea", {
     ...commonStyles,
     height: "72px",
-    width: "200px"
+    minWidth: "200px",
+    width: "100%"
 })
 
 const TextBox = ({ children, label, mode, model, multiline, placeholder, onUpdate }) => {

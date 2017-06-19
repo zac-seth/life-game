@@ -5,14 +5,13 @@ import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/
 import Input from "./input"
 import Text from "./text"
 
-const SwitchContainer = styled("div", ({ hasLabel }) => ({
+const SwitchContainer = styled("div", () => ({
     position: "relative",
     display: "inline-block",
     width: "48px",
     height: "24px",
     border: "2px solid #999",
     padding: "2px",
-    marginLeft: hasLabel ? "5px" : 0,
     backgroundColor: "#FFF",
     cursor: "pointer"
 }))
@@ -40,7 +39,7 @@ const Switch = styled("div", ({ isOn }) => {
 
 const OnOffSwitch = ({ isOn, label, mode, model, onSwitched }) => (
     <Input label={label} mode={mode} message={!!model && model.message}>
-        <SwitchContainer hasLabel={!!label} onClick={() => onSwitched(!isOn)}>
+        <SwitchContainer onClick={() => onSwitched(!isOn)}>
             <SwitchBody />
             <Switch isOn={isOn} />
         </SwitchContainer>

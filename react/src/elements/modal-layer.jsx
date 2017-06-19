@@ -25,14 +25,17 @@ const ModalLayerBackdrop = styled("div", {
 const ModalLayerFrame = styled("div", {
     backgroundColor: "#FFF",
     flex: "0 0 480px",
-    width: "480px",
-    height: "270px"
+    width: "480px"
 })
 
-let ModalLayer = ({ children, settings, title, onClose }) => {
+let ModalLayer = ({ children, handleClose, settings, title, onClose }) => {
     if (!settings.show) {
         return null
     }
+
+    handleClose(() => {
+        onClose()
+    })
 
     return (
         <ModalLayerBackdrop onClick={onClose}>
@@ -57,22 +60,20 @@ ModalLayer.propTypes = {
     onClose: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state, { title, name }) => ({
+ModalLayer = connect((state, { handleClose, name, title }) => ({
+    handleClose,
     title,
     settings: {
         show: state.application.layers.types.modal[name]
     }
-})
-
-const mapDispatchToProps = (dispatch, { name }) => ({
+}), (dispatch, { name }) => ({
     onClose: () => dispatch(toggleLayerVisibility({ name, type: LayerType.MODAL }))
-})
-
-ModalLayer = connect(mapStateToProps, mapDispatchToProps)(ModalLayer)
+}))(ModalLayer)
 
 ModalLayer.propTypes = {
-    title: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    handleClose: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
 }
 
 export default ModalLayer

@@ -3,17 +3,21 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import * as HabitScale from "@/store/habits/habit-scales"
 import {
+    clearCreateState,
     validateDescInput,
     validateNameInput,
+    validateNewHabit,
     validateScaleInput
 } from "@/store/habits/create/actions"
+import { createHabit } from "@/store/habits/list/actions"
 import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/props"
-import ActionStrip, { ActionGroup } from "@/elements/action-strip"
 import Button, { ButtonType } from "@/elements/button"
 import Form from "@/elements/form"
 import RadioList from "@/elements/radio-list"
 import Text from "@/elements/text"
 import TextBox from "@/elements/text-box"
+
+const { ButtonStrip } = Form
 
 const scaleFilterOptions = [
     { label: "Daily", value: HabitScale.DAILY },
@@ -28,17 +32,15 @@ let CreateHabitForm = ({ name, desc, scale, onNameChanged, onDescChanged, onScal
         <TextBox label="Name" model={name} onUpdate={value => onNameChanged(value)} />
         <TextBox multiline label="Description" model={desc} onUpdate={value => onDescChanged(value)} />
         <RadioList 
-            label="Recurs"
+            label="Recurrence"
             options={scaleFilterOptions}
             model={scale}
             direction={RadioList.direction.VERTICAL}
             onSelectionMade={option => onScaleChanged(option.value)} />
-        <ActionStrip>
-            <ActionGroup align="right">
-                <Button type={ButtonType.NEGATIVE} onClick={() => onCancel()}>Cancel</Button>
-                <Button type={ButtonType.AFFIRMATIVE} onClick={() => onSave()}>Save</Button>
-            </ActionGroup>
-        </ActionStrip>
+        <Form.ButtonStrip>
+            <Button styles={Form.ButtonStrip.buttonStyles} type={ButtonType.NEGATIVE} onClick={() => onCancel()}>Cancel</Button>
+            <Button styles={Form.ButtonStrip.buttonStyles} type={ButtonType.AFFIRMATIVE} onClick={() => onSave()}>Save</Button>
+        </Form.ButtonStrip>
     </Form>
 )
 
@@ -64,29 +66,42 @@ CreateHabitForm.propTypes = {
     onScaleChanged: PropTypes.func.isRequired
 }
 
+function closeForm(dispatch, props) {
+    return dispatch(clearCreateState())
+        .then(() => props.onClose())
+}
+
 CreateHabitForm = connect(
     ({ habits }, ownProps) => ({ 
         ...habits.create 
     }), 
     (dispatch, ownProps) => ({
         onCancel: () => {
-            console.log(`CreateHabitForm.onCancel() called`)
+            // Should display a dialog for confirmation here, but that will be done later.
+            closeForm(dispatch, ownProps)
         },
         onDescChanged: desc => {
-            console.log(`CreateHabitForm.onDescChanged() called: ${desc}`)
             dispatch(validateDescInput(desc))
         },
         onNameChanged: name => {
-            console.log(`CreateHabitForm.onNameChanged() called: ${name}`)
             dispatch(validateNameInput(name))
         },
         onSave: () => {
-            console.log(`CreateHabitForm.onSave() called`)
+            dispatch(validateNewHabit())
+                .then(habit => {
+                    return dispatch(createHabit(habit)).then(closeForm(dispatch, ownProps))
+                }, invalidValues => {
+                    console.log("Validation failed, set the appropriate state on the invalid values: ", invalidValues)
+                })
         },
         onScaleChanged: scale => {
             dispatch(validateScaleInput(scale))
         }
     })
 )(CreateHabitForm)
+
+CreateHabitForm.propTypes = {
+    onClose: PropTypes.func.isRequired
+}
 
 export default CreateHabitForm

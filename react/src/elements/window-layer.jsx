@@ -17,14 +17,14 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
     return {
         backgroundColor: "#FFF",
         flex: "0 0 640px",
-        width: "640px",
-        height: "360px",
+        width: "720px",
+        height: "480px",
         boxShadow: "3px 3px 3px 0 #BBB",
         position: "absolute",
         top: `50%`,
         left: `50%`,
-        marginLeft: "-320px",
-        marginTop: "-180px",
+        marginLeft: "-360px",
+        marginTop: "-240px",
         zIndex: 1000 + indent
     }
 })
