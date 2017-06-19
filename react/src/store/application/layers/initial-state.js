@@ -7,8 +7,9 @@ export default deepFreeze({
             createHabit: false
         },
         window: {
+            achievements: false,
             habits: false,
-            blah: false
+            profile: false
         }
     }
 })
