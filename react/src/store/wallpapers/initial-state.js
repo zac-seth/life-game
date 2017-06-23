@@ -1,4 +1,4 @@
-import wallpapers from "@/assets/images/wallpapers"
+import wallpapers from "assets/images/wallpapers"
 
 export default {
     selectedIndex: 0,

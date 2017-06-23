@@ -1,21 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import * as HabitScale from "@/store/habits/habit-scales"
+import * as HabitScale from "store/habits/habit-scales"
 import {
     clearCreateState,
     validateDescInput,
     validateNameInput,
     validateNewHabit,
     validateScaleInput
-} from "@/store/habits/create/actions"
-import { createHabit } from "@/store/habits/list/actions"
-import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/props"
-import Button, { ButtonType } from "@/elements/button"
-import Form from "@/elements/form"
-import RadioList from "@/elements/radio-list"
-import Text from "@/elements/text"
-import TextBox from "@/elements/text-box"
+} from "store/habits/create/actions"
+import { createHabit } from "store/habits/list/actions"
+import { buildCustomPropEnumValidator, buildFormInputModelShape } from "utils/props"
+import Button, { ButtonType } from "elements/button"
+import Form from "elements/form"
+import RadioList from "elements/radio-list"
+import Text from "elements/text"
+import TextBox from "elements/text-box"
 
 const { ButtonStrip } = Form
 
@@ -66,9 +66,10 @@ CreateHabitForm.propTypes = {
     onScaleChanged: PropTypes.func.isRequired
 }
 
-function closeForm(dispatch, props) {
-    return dispatch(clearCreateState())
-        .then(() => props.onClose())
+async function closeForm(dispatch, props) {
+    await dispatch(clearCreateState())
+    
+    props.onClose()
 }
 
 CreateHabitForm = connect(
@@ -76,26 +77,28 @@ CreateHabitForm = connect(
         ...habits.create 
     }), 
     (dispatch, ownProps) => ({
-        onCancel: () => {
+        onCancel: async () => {
             // Should display a dialog for confirmation here, but that will be done later.
-            closeForm(dispatch, ownProps)
+            await closeForm(dispatch, ownProps)()
         },
-        onDescChanged: desc => {
-            dispatch(validateDescInput(desc))
+        onDescChanged: async desc => {
+            await dispatch(validateDescInput(desc))
         },
-        onNameChanged: name => {
-            dispatch(validateNameInput(name))
+        onNameChanged: async name => {
+            await dispatch(validateNameInput(name))
         },
-        onSave: () => {
-            dispatch(validateNewHabit())
-                .then(habit => {
-                    return dispatch(createHabit(habit)).then(closeForm(dispatch, ownProps))
-                }, invalidValues => {
-                    console.log("Validation failed, set the appropriate state on the invalid values: ", invalidValues)
-                })
+        onSave: async () => {
+            try {
+                const habit = await dispatch(validateNewHabit())
+                const result = await dispatch(createHabit(habit))
+
+                await closeForm(dispatch, ownProps)
+            } catch (invalidValues) {
+                console.log("Validation failed, set the appropriate state on the invalid values: ", invalidValues)
+            }
         },
-        onScaleChanged: scale => {
-            dispatch(validateScaleInput(scale))
+        onScaleChanged: async scale => {
+            await dispatch(validateScaleInput(scale))
         }
     })
 )(CreateHabitForm)

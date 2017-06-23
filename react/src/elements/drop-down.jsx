@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
 import { MdKeyboardArrowDown } from "react-icons/lib/md"
-import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/props"
+import { buildCustomPropEnumValidator, buildFormInputModelShape } from "utils/props"
 import Input from "./input"
 import Text from "./text"
 
@@ -91,15 +91,13 @@ class DropDown extends React.Component {
         }
     }
 
-    handleSelectionMade(option) {
-        this.state
-            .onSelectionMade(option)
-            .then(() => {
-                this.setState({
-                    selectedOption: option,
-                    isOpen: false
-                })
-            })
+    async handleSelectionMade(option) {
+        await this.state.onSelectionMade(option)
+        
+        this.setState({
+            selectedOption: option,
+            isOpen: false
+        })
     }
 
     handleToggleList(e) {

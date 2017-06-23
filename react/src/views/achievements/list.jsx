@@ -1,9 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import List from "@/elements/list"
-import ListItem from "@/elements/list-item"
-import Text from "@/elements/text"
+import List from "elements/list"
+import ListItem from "elements/list-item"
+import Text from "elements/text"
 
 let AchievementsList = ({ achievements, onAchievementSelected }) => (
     <List>

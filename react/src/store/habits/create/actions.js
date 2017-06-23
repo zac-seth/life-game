@@ -1,7 +1,7 @@
-import { createAction } from "@/utils/store"
-import ActionType from "@/store/action-type"
-import * as HabitScale from "@/store/habits/habit-scales"
-import { FormInputMessageType } from "@/elements/form"
+import { createAction } from "utils/store"
+import ActionType from "store/action-type"
+import * as HabitScale from "store/habits/habit-scales"
+import { FormInputMessageType } from "elements/form"
 
 export function clearCreateState() {
     return function(dispatch) {

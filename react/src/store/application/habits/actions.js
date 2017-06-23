@@ -1,5 +1,5 @@
-import { createAction } from "@/utils/store"
-import ActionType from "@/store/action-type"
+import { createAction } from "utils/store"
+import ActionType from "store/action-type"
 
 export function setExpandedHabits(expanded) {
     return dispatch => {

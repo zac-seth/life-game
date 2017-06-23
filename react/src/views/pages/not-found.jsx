@@ -1,6 +1,6 @@
 import React from "react"
-import Text from "@/elements/text"
-import Page from "@/elements/page"
+import Text from "elements/text"
+import Page from "elements/page"
 
 const NotFound = props => (
     <Page>

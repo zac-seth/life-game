@@ -1,5 +1,5 @@
 import React from "react"
-import ModalLayer from "@/elements/modal-layer"
+import ModalLayer from "elements/modal-layer"
 import CreateHabit from "./form"
 
 const CreateHabitModal = () => {

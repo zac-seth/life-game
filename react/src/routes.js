@@ -1,6 +1,6 @@
 import React from "react"
-import Home from "@/views/pages/home"
-import NotFound from "@/views/pages/not-found"
+import Home from "views/pages/home"
+import NotFound from "views/pages/not-found"
 
 export default [
     {

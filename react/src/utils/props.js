@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { FormInputMessageType } from "@/elements/form"
+import { FormInputMessageType } from "elements/form"
 
 export function buildCustomPropEnumValidator(componentName, enumObj, isRequired = true) {
     return function (prop, propName) {

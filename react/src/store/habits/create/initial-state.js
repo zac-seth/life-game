@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
-import * as HabitScale from "@/store/habits/habit-scales"
-import { FormInputMessageType } from "@/elements/form"
+import * as HabitScale from "store/habits/habit-scales"
+import { FormInputMessageType } from "elements/form"
 
 export function getDefaultCreateState() {
     return {

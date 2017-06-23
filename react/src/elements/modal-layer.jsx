@@ -2,11 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { styled } from "styletron-react"
-import { toggleLayerVisibility } from "@/store/application/layers/actions"
-import LayerType from "@/store/application/layers/layer-types"
-import Panel from "@/elements/panel"
-import Text from "@/elements/text"
-import TitleBar from "@/elements/title-bar"
+import { toggleLayerVisibility } from "store/application/layers/actions"
+import LayerType from "store/application/layers/layer-types"
+import Panel from "elements/panel"
+import Text from "elements/text"
+import TitleBar from "elements/title-bar"
 
 const ModalLayerBackdrop = styled("div", {
     position: "absolute",

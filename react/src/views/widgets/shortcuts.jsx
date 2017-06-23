@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { toggleLayerVisibility } from "@/store/application/layers/actions"
-import LayerType from "@/store/application/layers/layer-types"
-import Button, { ButtonType } from "@/elements/button"
-import Widget from "@/elements/widget"
+import { toggleLayerVisibility } from "store/application/layers/actions"
+import LayerType from "store/application/layers/layer-types"
+import Button, { ButtonType } from "elements/button"
+import Widget from "elements/widget"
 
 const buttonStyles = {
     marginLeft: "10px"

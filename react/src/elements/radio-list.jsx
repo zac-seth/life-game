@@ -5,8 +5,8 @@ import {
     buildCustomPropEnumValidator,
     buildFormInputModelShape,
     checkForPropChanges
-} from "@/utils/props"
-import { randomId } from "@/utils/strings"
+} from "utils/props"
+import { randomId } from "utils/strings"
 import Input from "./input"
 import Text from "./text"
 

@@ -1,11 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { NONE } from "@/store/habits/habit-scales"
-import { setExpandedHabits } from "@/store/application/habits/actions"
-import Text from "@/elements/text"
-import QuestList from "@/views/quests/quest-list"
-import QuestListItem from "@/views/quests/quest-list-item"
+import { NONE } from "store/habits/habit-scales"
+import { setExpandedHabits } from "store/application/habits/actions"
+import Text from "elements/text"
+import QuestList from "views/quests/quest-list"
+import QuestListItem from "views/quests/quest-list-item"
 
 let HabitList = ({ expanded, habits, onToggleExpanded }) => (
     <QuestList>

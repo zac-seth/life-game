@@ -4,14 +4,14 @@ import { Provider as ReduxProvider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import StyletronClient from "styletron-client"
 import { StyletronProvider } from "styletron-react"
-import App from "@/app"
-import configureStore from "@/store"
-import { loadHabits } from "@/store/habits/list/actions"
-import { setSelectedWallpaperIndex } from "@/store/wallpapers/actions"
+import App from "./app"
+import configureStore from "store"
+import { loadHabits } from "store/habits/list/actions"
+import { setSelectedWallpaperIndex } from "store/wallpapers/actions"
 
 import "minireset.css"
-import "@/assets/globals.css"
-import "@/assets/fonts.css"
+import "assets/globals.css"
+import "assets/fonts.css"
 
 const store = configureStore()
 store.dispatch(loadHabits())

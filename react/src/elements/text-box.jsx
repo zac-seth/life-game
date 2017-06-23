@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
-import { buildCustomPropEnumValidator, buildFormInputModelShape } from "@/utils/props"
+import { buildCustomPropEnumValidator, buildFormInputModelShape } from "utils/props"
 import Input from "./input"
 import Text from "./text"
 

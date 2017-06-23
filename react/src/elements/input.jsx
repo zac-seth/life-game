@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { styled } from "styletron-react"
-import { buildCustomPropEnumValidator, buildValidationMessageShape } from "@/utils/props"
+import { buildCustomPropEnumValidator, buildValidationMessageShape } from "utils/props"
 import { Types as TextTypes } from "./text"
 
 const displayMode = {

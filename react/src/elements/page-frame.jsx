@@ -1,7 +1,7 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
 import { styled } from "styletron-react"
-import routes from "@/routes"
+import routes from "../routes"
 
 const PageFrameContainer = styled("div", {
     position: "absolute",
