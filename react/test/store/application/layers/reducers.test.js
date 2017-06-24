@@ -1,6 +1,6 @@
 import test from "ava"
 import deepfreeze from "deep-freeze"
-import ActionType from "store/action-types"
+import ActionType from "store/action-type"
 import reducer from "store/application/layers/reducer"
 import LayerType from "store/application/layers/layer-types"
 
