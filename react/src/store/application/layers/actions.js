@@ -2,6 +2,10 @@ import { createAction } from "utils/store"
 import ActionType from "store/action-type"
 import layerTypes from "./layer-types"
 
+export function addLayerToStack(layer) {
+    return createAction(ActionType.ADD_LAYER_TO_STACK, layer)
+}
+
 export function bringLayerToTop(layer) {
     return function (dispatch, getState) {
         const layers = getState().application.layers
@@ -28,7 +32,7 @@ export function toggleLayerVisibility(layer) {
                 }
             }
 
-            dispatch(createAction(ActionType.ADD_LAYER_TO_STACK, layer))
+            dispatch(addLayerToStack(layer))
             dispatch(createAction(ActionType.SET_LAYER_VISIBILITY, layer))
         } else if (stack.length) {
             dispatch(createAction(ActionType.SET_LAYER_VISIBILITY, layer))
