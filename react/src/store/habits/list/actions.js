@@ -8,7 +8,7 @@ export function createHabit(habit) {
         let newId = habits.list.length > 0 ? Math.max.apply(null, habits.list.map(h => h.id)) + 1 : 1
         let newHabit = { ...habit, id: newId }
 
-        dispatch(createAction(ActionType.CREATE_HABIT, newHabit))
+        dispatch(createAction(ActionType.INSERT_HABIT, newHabit))
 
         return Promise.resolve()
     }

@@ -13,13 +13,11 @@ export default createReducer({
     [ActionType.BRING_LAYER_TO_TOP_OF_STACK]({ stack, types }, layer) {
         const filteredStack = removeLayerFromStack(stack, layer)
         const sliceIndex = stack.lastIndexOf(stack.find(item => item.type === layer.type))
+        const startSlice = filteredStack.slice(0, sliceIndex)
+        const endSlice = filteredStack.slice(sliceIndex)
 
         return {
-            stack: [
-                ...filteredStack.slice(0, sliceIndex - 1),
-                layer,
-                ...filteredStack.slice(sliceIndex + 1)
-            ],
+            stack: [...startSlice, ...endSlice, layer],
             types
         }
     },

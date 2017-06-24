@@ -6,12 +6,20 @@ export function addLayerToStack(layer) {
     return createAction(ActionType.ADD_LAYER_TO_STACK, layer)
 }
 
+export function bringLayerToTopOfStack(layer) {
+    return createAction(ActionType.BRING_LAYER_TO_TOP_OF_STACK, layer)
+}
+
+export function removeLayerFromStack(layer) {
+    return createAction(ActionType.REMOVE_LAYER_FROM_STACK, layer)
+}
+
 export function bringLayerToTop(layer) {
     return function (dispatch, getState) {
         const layers = getState().application.layers
         
         if (isLayerShown(layers, layer.type, layer.name)) {
-            dispatch(createAction(ActionType.BRING_LAYER_TO_TOP_OF_STACK, layer))
+            dispatch(bringLayerToTopOfStack(layer))
         }
 
         return Promise.resolve()
@@ -36,7 +44,7 @@ export function toggleLayerVisibility(layer) {
             dispatch(createAction(ActionType.SET_LAYER_VISIBILITY, layer))
         } else if (stack.length) {
             dispatch(createAction(ActionType.SET_LAYER_VISIBILITY, layer))
-            dispatch(createAction(ActionType.REMOVE_LAYER_FROM_STACK, layer))
+            dispatch(removeLayerFromStack(layer))
         }
 
         return Promise.resolve()

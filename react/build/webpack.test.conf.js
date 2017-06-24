@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const nodeExternals = require('webpack-node-externals');
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -50,5 +51,8 @@ module.exports = {
 
             callback();
         }
+    ],
+    plugins: [
+        new CleanWebpackPlugin(['_test-build/*.*'])
     ]
 };
