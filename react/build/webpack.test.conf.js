@@ -16,34 +16,29 @@ const entryObj = glob.sync('test/**/*.js')
 module.exports = {
     target: 'node',
     entry: entryObj,
+    devtool: "inline-source-map",
     output: {
-        path: resolve('_test-build'),
+        path: resolve('.test'),
         filename: '[name].js'
     },
     resolve: {
         extensions: ['.js', '.jsx', '.json'],
         alias: {
-            assets: resolve("_src/assets"),
-            elements: resolve("_src/elements"),
-            store: resolve("_src/store"),
-            utils: resolve("_src/utils"),
-            views: resolve("_src/views"),
+            assets: resolve(".src/assets"),
+            elements: resolve(".src/elements"),
+            store: resolve(".src/store"),
+            utils: resolve(".src/utils"),
+            views: resolve(".src/views"),
             test: resolve("test")
         }
     },
     externals: [
         nodeExternals(),
-        // Rewrite the require paths to use `_src`
         (context, request, callback) => {
-            // This is a little messy because tests are not output in original file structure
-            // test/index.test.js → _build/index.test.js
-            //=> ../src → ../_src
-            // test/my-pkg-fldr/my-module.test.js → _build/my-module.test.js
-            //=> ../../src → ../_src
             if (request.includes('/src')) {
                 const requestReqwrite = request
-                    .replace('/src', '/_src')
-                    .replace('../../_src', '../_src');
+                    .replace('/src', '/.src')
+                    .replace('../../.src', '../.src');
 
                 console.log(requestReqwrite);
                 return callback(null, `commonjs ${requestReqwrite}`);
@@ -53,6 +48,6 @@ module.exports = {
         }
     ],
     plugins: [
-        new CleanWebpackPlugin(['_test-build/*.*'])
+        new CleanWebpackPlugin(['.test/*.*'])
     ]
 };
