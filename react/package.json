@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node build/dev-server.js",
-    "precompile-src": "cross-env NODE_ENV=test babel src --out-dir .src --source-maps inline",
+    "precompile-src": "cross-env NODE_ENV=test babel src --out-dir .src --source-maps inline --plugins transform-runtime --presets=es2017,react,stage-2",
     "precompile-tests": "cross-env NODE_ENV=test webpack --config build/webpack.test.conf.js --display-error-details",
     "pretest": "npm run precompile-src && npm run precompile-tests",
     "test": "cross-env NODE_ENV=test nyc --cache ava .test --concurrency 3 --tap | faucet"
@@ -37,6 +37,7 @@
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
