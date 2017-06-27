@@ -15,6 +15,8 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
     const indent = ( layer + 1 ) * 100
 
     return {
+        display: "flex",
+        flexDirection: "column",
         backgroundColor: "#FFF",
         flex: "0 0 640px",
         width: "720px",
@@ -27,6 +29,11 @@ const WindowLayerFrame = styled("div", ({ layer }) => {
         marginTop: "-240px",
         zIndex: 1000 + indent
     }
+})
+
+const BodyPanel = styled(Panel, {
+    flexGrow: 1,
+    flexBasis: 0
 })
 
 class WindowLayer extends React.Component {
@@ -78,7 +85,9 @@ class WindowLayer extends React.Component {
                     <TitleBar id={this.state.titleBarId}>
                         <Text header>{this.state.title}</Text>
                     </TitleBar>
-                    {this.state.children}
+                    <BodyPanel>
+                        {this.state.children}
+                    </BodyPanel>
                 </WindowLayerFrame>
             </Draggable>
         )
