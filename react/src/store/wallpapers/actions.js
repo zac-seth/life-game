@@ -2,7 +2,7 @@ import { createAction } from "utils/store"
 import ActionType from "store/action-type"
 
 export function setSelectedWallpaperIndex() {
-    return function(dispatch, getState) {
+    return async (dispatch, getState) => {
         const { images, selectedIndex } = getState().wallpapers
 
         let newIndex = selectedIndex + 1
@@ -13,6 +13,6 @@ export function setSelectedWallpaperIndex() {
 
         dispatch(createAction(ActionType.SET_WALLPAPER_INDEX, newIndex))
 
-        return Promise.resolve()
+        return await Promise.resolve()
     }
 }
