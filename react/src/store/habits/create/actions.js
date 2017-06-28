@@ -4,39 +4,75 @@ import * as HabitScale from "store/habits/habit-scales"
 import { FormInputMessageType } from "elements/form"
 
 export function clearCreateState() {
-    return function(dispatch) {
-        dispatch(createAction(ActionType.CLEAR_CREATE_STATE))
+    return createAction(ActionType.CLEAR_CREATE_STATE)
+}
 
-        return Promise.resolve()
+export function setInvalidHabitName(value) {
+    return createFieldValidationAction(ActionType.SET_INVALID_HABIT_NAME, value, false, "The name isn't long enough yet. It needs at least 6 characters.")
+}
+
+export function setInvalidHabitScale() {
+    return createFieldValidationAction(ActionType.SET_INVALID_HABIT_SCALE, HabitScale.NONE, false, "You haven't chosen a valid scale for your habit. Choose one of the provided options.")
+}
+
+export function setValidHabitDesc(value) {
+    return createFieldValidationAction(ActionType.SET_VALID_HABIT_DESC, value, true, "Cool. That's description is fine.")
+}
+
+export function setValidHabitName(value) {
+    return createFieldValidationAction(ActionType.SET_VALID_HABIT_NAME, value, true, "Cool. That name is fine.")
+}
+
+export function setValidHabitScale(value) {
+    return createFieldValidationAction(ActionType.SET_VALID_HABIT_SCALE, value, true, `Great! You've set the habit's scale to occur ${value.toLowerCase()}.`)
+}
+
+export function wipeCreateState() {
+    return async dispatch => {
+        dispatch(clearCreateState())
+
+        return await Promise.resolve()
     }
 }
 
-export function validateScaleInput(newScale) {
-    return function(dispatch) {
-        const isValid = newScale && newScale !== HabitScale.NONE && !!Object.keys(HabitScale).map(key => HabitScale[key]).find(scale => scale === newScale)
+export function validateDescInput(newDesc) {
+    return async function (dispatch) {
+        dispatch(setValidHabitDesc)
 
-        return dispatchValidationResult(
-            dispatch, isValid ? newScale : HabitScale.NONE, isValid,
-            buildData(ActionType.SET_VALID_HABIT_SCALE, `Great! You've set the habit's scale to occur ${newScale.toLowerCase()}.`),
-            buildData(ActionType.SET_INVALID_HABIT_SCALE, "You haven't chosen a valid scale for your habit. Choose one of the provided options.")
-        )
+        return await Promise.resolve()
     }
 }
 
 export function validateNameInput(newName) {
-    return function (dispatch) {
+    return async function (dispatch) {
         const isValid = !!newName && newName.length > 5
 
-        return dispatchValidationResult(
-            dispatch, newName, isValid,
-            buildData(ActionType.SET_VALID_HABIT_NAME, "Cool. That name is fine."),
-            buildData(ActionType.SET_INVALID_HABIT_NAME, "The name isn't long enough yet. It needs at least 6 characters.")
-        )
+        if (isValid) {
+            dispatch(setValidHabitName(newName))
+        } else {
+            dispatch(setInvalidHabitName(newName))
+        }
+        
+        return await Promise.resolve()
+    }
+}
+
+export function validateScaleInput(newScale) {
+    return async function(dispatch) {
+        const isValid = newScale && newScale !== HabitScale.NONE && !!Object.keys(HabitScale).map(key => HabitScale[key]).find(scale => scale === newScale)
+
+        if (isValid) {
+            dispatch(setValidHabitScale(newScale))
+        } else {
+            dispatch(setInvalidHabitScale())
+        }
+
+        return await Promise.resolve()
     }
 }
 
 export function validateNewHabit() {
-    return function (dispatch, getState) {
+    return async function (dispatch, getState) {
         const { habits } = getState()
         const values = habits.create
         const invalidValues = Object
@@ -47,34 +83,19 @@ export function validateNewHabit() {
             ? { isValid: false, invalidValues } 
             : { isValid: true, habit: { name: values.name.value, desc: values.desc.value, scale: values.scale.value } }
 
-        return result.isValid ? Promise.resolve(result.habit) : Promise.reject(result.invalidValues)
+        return result.isValid 
+            ? await Promise.resolve(result.habit) 
+            : await Promise.reject(result.invalidValues)
     }
 }
 
-export function validateDescInput(newDesc) {
-    return function (dispatch) {
-        return dispatchValidationResult(
-            dispatch, newDesc, true,
-            buildData(ActionType.SET_VALID_HABIT_DESC, "Cool. That's description is fine.")
-        )
-    }
-}
-
-function buildData(actionType, text) {
-    return { actionType, text }
-}
-
-function dispatchValidationResult(dispatch, value, isValid, validData, invalidData) {
-    const action = createAction(isValid ? validData.actionType : invalidData.actionType, {
+function createFieldValidationAction(actionType, value, isValid, messageText, messageType) {
+    return createAction(actionType, {
         value,
         isValid,
         message: {
-            text: isValid ? validData.text: invalidData.text,
-            type: isValid ? FormInputMessageType.SUCCESS: FormInputMessageType.ERROR
+            text: messageText,
+            type: isValid ? FormInputMessageType.SUCCESS : FormInputMessageType.ERROR
         }
     })
-
-    dispatch(action)
-
-    return Promise.resolve()
 }

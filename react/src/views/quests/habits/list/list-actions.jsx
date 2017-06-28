@@ -3,7 +3,10 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { toggleLayerVisibility } from "store/application/layers/actions"
 import LayerType from "store/application/layers/layer-types"
-import { setExpandedHabits, setScaleFilter } from "store/application/habits/actions"
+import { 
+    specifyExpandedHabits, 
+    specifyScaleFilter
+} from "store/application/habits/actions"
 import * as HabitScale from "store/habits/habit-scales"
 import ActionStrip, { ActionGroup } from "elements/action-strip"
 import Button, { ButtonType } from "elements/button"
@@ -74,8 +77,8 @@ const mapStateToProps = ({ application }, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onOpen: () => dispatch(toggleLayerVisibility({ type: LayerType.MODAL, name: "createHabit" })),
-    onScaleFilterSelected: scaleFilter => dispatch(setScaleFilter(scaleFilter.value)),
-    onSwitchDetailExpansion: expanded => dispatch(setExpandedHabits(expanded))
+    onScaleFilterSelected: scaleFilter => dispatch(specifyScaleFilter(scaleFilter.value)),
+    onSwitchDetailExpansion: expanded => dispatch(specifyExpandedHabits(expanded))
 })
 
 HabitListActions = connect(mapStateToProps, mapDispatchToProps)(HabitListActions)

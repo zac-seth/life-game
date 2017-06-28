@@ -15,19 +15,19 @@ export function removeLayerFromStack(layer) {
 }
 
 export function bringLayerToTop(layer) {
-    return function (dispatch, getState) {
+    return async (dispatch, getState) => {
         const layers = getState().application.layers
         
         if (isLayerShown(layers, layer.type, layer.name)) {
             dispatch(bringLayerToTopOfStack(layer))
         }
 
-        return Promise.resolve()
+        return await Promise.resolve()
     }
 }
 
 export function toggleLayerVisibility(layer) {
-    return function(dispatch, getState) {
+    return async (dispatch, getState) => {
         const layers = getState().application.layers,
             stack = layers.stack
 
@@ -36,7 +36,7 @@ export function toggleLayerVisibility(layer) {
                 const topLayer = getTopLayerFromStack(stack)
 
                 if (!canStackLayer(layer, topLayer)) {
-                    return Promise.reject({ message: `Attempted to add a ${layer.type} layer over of a ${topLayer.type} layer.` })
+                    return await Promise.reject({ message: `Attempted to add a ${layer.type} layer over of a ${topLayer.type} layer.` })
                 }
             }
 
@@ -47,7 +47,7 @@ export function toggleLayerVisibility(layer) {
             dispatch(removeLayerFromStack(layer))
         }
 
-        return Promise.resolve()
+        return await Promise.resolve()
     }
 }
 

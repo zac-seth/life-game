@@ -2,28 +2,30 @@ import { createAction } from "utils/store"
 import ActionType from "store/action-type"
 import { loadedHabits } from "./initial-state"
 
+export function insertHabit(habit) {
+    return createAction(ActionType.INSERT_HABIT, habit)
+}
+
+export function setHabits(habits) {
+    return createAction(ActionType.SET_HABITS, habits)
+}
+
 export function createHabit(habit) {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const { habits } = getState()
         let newId = habits.list.length > 0 ? Math.max.apply(null, habits.list.map(h => h.id)) + 1 : 1
         let newHabit = { ...habit, id: newId }
 
-        dispatch(createAction(ActionType.INSERT_HABIT, newHabit))
+        dispatch(insertHabit(newHabit))
 
-        return Promise.resolve()
+        return await Promise.resolve()
     }
 }
 
 export function loadHabits() {
-    return dispatch => {
-        dispatch(createAction(ActionType.SET_HABITS, loadedHabits))
+    return async dispatch => {
+        dispatch(setHabits(loadedHabits))
 
-        return Promise.resolve()
+        return await Promise.resolve()
     }
-}
-
-export function setScaleFilter(scaleFilter) {
-    dispatch(createAction(ActionType.SET_SCALE_FILTER, scaleFilter))
-
-    return Promise.resolve()
 }

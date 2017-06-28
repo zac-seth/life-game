@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { NONE } from "store/habits/habit-scales"
-import { setExpandedHabits } from "store/application/habits/actions"
+import { specifyExpandedHabits } from "store/application/habits/actions"
 import Text from "elements/text"
 import QuestList from "views/quests/quest-list"
 import QuestListItem from "views/quests/quest-list-item"
@@ -41,7 +41,7 @@ const mapStateToProps = ({ application, habits }, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onToggleExpanded: expanded => {
-        dispatch(setExpandedHabits(expanded))
+        dispatch(specifyExpandedHabits(expanded))
     }
 })
 

@@ -3,11 +3,11 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import * as HabitScale from "store/habits/habit-scales"
 import {
-    clearCreateState,
     validateDescInput,
     validateNameInput,
     validateNewHabit,
-    validateScaleInput
+    validateScaleInput,
+    wipeCreateState
 } from "store/habits/create/actions"
 import { createHabit } from "store/habits/list/actions"
 import { buildCustomPropEnumValidator, buildFormInputModelShape } from "utils/props"
@@ -67,7 +67,7 @@ CreateHabitForm.propTypes = {
 }
 
 async function closeForm(dispatch, props) {
-    await dispatch(clearCreateState())
+    await dispatch(wipeCreateState())
     
     props.onClose()
 }
