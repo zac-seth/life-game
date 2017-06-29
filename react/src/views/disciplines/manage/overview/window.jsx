@@ -1,11 +1,11 @@
 import React from "react"
 import LayerName from "store/application/layers/layer-names"
 import WindowLayer from "elements/window-layer"
-import Text from "elements/text"
+import DisciplineList from "./list"
 
 const DisciplinesWindow = () => (
-    <WindowLayer title="Your Disciplines" name={LayerName.DISCIPLINES}>
-        <Text>Your Disciplines</Text>
+    <WindowLayer title="Disciplines" name={LayerName.DISCIPLINES}>
+        <DisciplineList />
     </WindowLayer>
 )
 

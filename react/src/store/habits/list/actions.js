@@ -1,6 +1,7 @@
 import { createAction } from "utils/store"
+import { randomId } from "utils/strings"
 import ActionType from "store/action-type"
-import { loadedHabits } from "./initial-state"
+import { getLoadedHabits } from "./initial-state"
 
 export function insertHabit(habit) {
     return createAction(ActionType.INSERT_HABIT, habit)
@@ -13,8 +14,7 @@ export function setHabits(habits) {
 export function createHabit(habit) {
     return async (dispatch, getState) => {
         const { habits } = getState()
-        let newId = habits.list.length > 0 ? Math.max.apply(null, habits.list.map(h => h.id)) + 1 : 1
-        let newHabit = { ...habit, id: newId }
+        const newHabit = { ...habit, id: randomId() }
 
         dispatch(insertHabit(newHabit))
 
@@ -24,7 +24,7 @@ export function createHabit(habit) {
 
 export function loadHabits() {
     return async dispatch => {
-        dispatch(setHabits(loadedHabits))
+        dispatch(setHabits(getLoadedHabits()))
 
         return await Promise.resolve()
     }

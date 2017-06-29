@@ -22,7 +22,7 @@ let HabitList = ({ expanded, habits, onToggleExpanded }) => (
 HabitList.propTypes = {
     expanded: PropTypes.bool.isRequired,
     habits: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         desc: PropTypes.string,
         scale: PropTypes.string.isRequired

@@ -1,23 +1,28 @@
 import deepFreeze from "deep-freeze"
+import { randomId } from "utils/strings"
 import * as habitScales from "../habit-scales"
 
-export const loadedHabits = [
+const loadedHabits = deepFreeze([
     {
-        id: 1,
-        name: "Habit 1",
-        desc: "This is the first habit.",
+        id: randomId(),
+        name: "Basic Workout",
+        desc: "Perform a basic workout every day.",
         scale: habitScales.DAILY
     }, {
-        id: 2,
+        id: randomId(),
         name: "Habit 2",
         desc: "I really want this one to happen.",
         scale: habitScales.WEEKLY
     }, {
-        id: 3,
+        id: randomId(),
         name: "Habit 3",
         desc: "This will change my life!",
         scale: habitScales.DAILY
     }
-]
+])
+
+export function getLoadedHabits() {
+    return loadedHabits
+}
 
 export default deepFreeze([])
