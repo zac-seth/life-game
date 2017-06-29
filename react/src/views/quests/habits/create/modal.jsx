@@ -1,4 +1,5 @@
 import React from "react"
+import LayerName from "store/application/layers/layer-names"
 import ModalLayer from "elements/modal-layer"
 import CreateHabit from "./form"
 
@@ -10,7 +11,7 @@ const CreateHabitModal = () => {
     }
 
     return (
-        <ModalLayer title="Create Habit" name="createHabit" handleClose={(cb) => {onClose = cb}}>
+        <ModalLayer title="Create Habit" name={LayerName.CREATE_HABIT} handleClose={(cb) => {onClose = cb}}>
             <CreateHabit onClose={() => onClose()} />
         </ModalLayer>
     )

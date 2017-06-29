@@ -10,9 +10,12 @@ import ShortcutsWidget from "views/widgets/shortcuts"
 import CreateHabitModal from "views/quests/habits/create/modal"
 
 // Windows
-import HabitListWindow from "views/quests/habits/list/window"
-import ProfileWindow from "views/user/profile/window"
+import AbilitiesWindow from "views/abilities/manage/overview/window"
 import AchievementsWindow from "views/achievements/window"
+import DisciplinesWindow from "views/disciplines/manage/overview/window"
+import HabitListWindow from "views/quests/habits/list/window"
+import LessonsWindow from "views/lessons/manage/overview/window"
+import ProfileWindow from "views/user/profile/window"
 
 const AppContainer = styled("div", {
     position: "absolute",
@@ -34,7 +37,10 @@ let App = () => (
 
         {/* Windows */}
         <ProfileWindow />
+        <DisciplinesWindow />
         <HabitListWindow />
+        <AbilitiesWindow />
+        <LessonsWindow />
         <AchievementsWindow />
 
         {/* Modals */}

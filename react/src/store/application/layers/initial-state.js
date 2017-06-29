@@ -1,15 +1,19 @@
 import deepFreeze from "deep-freeze"
+import LayerName from "./layer-names"
 
 export default deepFreeze({
     stack: [],
     types: {
         modal: {
-            createHabit: false
+            [LayerName.CREATE_HABIT]: false
         },
         window: {
-            achievements: false,
-            habits: false,
-            profile: false
+            [LayerName.ABILITIES]: false,
+            [LayerName.ACHIEVEMENTS]: false,
+            [LayerName.DISCIPLINES]: false,
+            [LayerName.HABITS]: false,
+            [LayerName.LESSONS]: false,
+            [LayerName.PROFILE]: false
         }
     }
 })

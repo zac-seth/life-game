@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { toggleLayerVisibility } from "store/application/layers/actions"
+import LayerName from "store/application/layers/layer-names"
 import LayerType from "store/application/layers/layer-types"
 import { 
     specifyExpandedHabits, 
@@ -76,7 +77,7 @@ const mapStateToProps = ({ application }, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onOpen: () => dispatch(toggleLayerVisibility({ type: LayerType.MODAL, name: "createHabit" })),
+    onOpen: () => dispatch(toggleLayerVisibility({ type: LayerType.MODAL, name: LayerName.CREATE_HABIT })),
     onScaleFilterSelected: scaleFilter => dispatch(specifyScaleFilter(scaleFilter.value)),
     onSwitchDetailExpansion: expanded => dispatch(specifyExpandedHabits(expanded))
 })
